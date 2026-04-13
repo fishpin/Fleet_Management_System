@@ -1,0 +1,8 @@
+﻿@model Customer
+<h2>Create Customer</h2>
+<form asp-action="Create" method="post">
+    <input asp-for="FullName" placeholder="Full Name" />
+    <input asp-for="Email" placeholder="Email" />
+    <input asp-for="Phone" placeholder="Phone" />
+    <button type="submit">Save</button>
+</form>

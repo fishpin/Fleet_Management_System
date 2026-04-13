@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Vehicle>
+<h2>Vehicles</h2>
+<a asp-action="Create">Create New</a>
+<table class="table">
+    <tr>
+        <th>Make</th>
+        <th>Model</th>
+        <th>Year</th>
+        <th>Price/Day</th>
+        <th>Available</th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Make</td>
+            <td>@item.Model</td>
+            <td>@item.Year</td>
+            <td>@item.PricePerDay</td>
+            <td>@item.IsAvailable</td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+    }
+</table>

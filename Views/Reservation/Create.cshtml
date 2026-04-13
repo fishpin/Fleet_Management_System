@@ -1,0 +1,22 @@
+﻿@model Reservation
+<h2>Create Reservation</h2>
+<form asp-action="Create" method="post">
+    <select asp-for="VehicleId">
+        @foreach (var v in ViewBag.Vehicles)
+        {
+            <option value="@v.Id">@v.Make @v.Model</option>
+        }
+    </select>
+
+    <select asp-for="CustomerId">
+        @foreach (var c in ViewBag.Customers)
+        {
+            <option value="@c.Id">@c.FullName</option>
+        }
+    </select>
+
+    <input asp-for="StartDate" type="date" />
+    <input asp-for="EndDate" type="date" />
+
+    <button type="submit">Save</button>
+</form>

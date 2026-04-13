@@ -1,0 +1,8 @@
+﻿@model Billing
+<h2>Create Bill</h2>
+<form asp-action="Create" method="post">
+    <input asp-for="ReservationId" placeholder="Reservation Id" />
+    <input asp-for="Tax" placeholder="Tax" />
+    <input asp-for="ExtraCharges" placeholder="Extra Charges" />
+    <button type="submit">Generate</button>
+</form>

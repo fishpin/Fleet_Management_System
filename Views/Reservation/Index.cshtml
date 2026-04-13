@@ -1,0 +1,16 @@
+﻿@model IEnumerable<Reservation>
+<h2>Reservations</h2>
+<a asp-action="Create">Create New</a>
+<table class="table">
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Vehicle?.Make</td>
+            <td>@item.Customer?.FullName</td>
+            <td>@item.StartDate.ToShortDateString()</td>
+            <td>@item.EndDate.ToShortDateString()</td>
+            <td>@item.TotalCost</td>
+        </tr>
+    }
+</table>

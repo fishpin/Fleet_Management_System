@@ -1,0 +1,9 @@
+﻿@model Vehicle
+<h2>Create Vehicle</h2>
+<form asp-action="Create" method="post">
+    <input asp-for="Make" placeholder="Make" />
+    <input asp-for="Model" placeholder="Model" />
+    <input asp-for="Year" placeholder="Year" />
+    <input asp-for="PricePerDay" placeholder="Price Per Day" />
+    <button type="submit">Save</button>
+</form>

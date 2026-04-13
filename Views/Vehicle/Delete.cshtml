@@ -1,0 +1,7 @@
+﻿@model Vehicle
+<h2>Delete Vehicle</h2>
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+    <p>Are you sure you want to delete @Model.Make @Model.Model?</p>
+    <button type="submit">Delete</button>
+</form>
