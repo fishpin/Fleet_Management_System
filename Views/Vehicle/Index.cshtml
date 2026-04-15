@@ -1,27 +1,50 @@
 ﻿@model IEnumerable<Vehicle>
-<h2>Vehicles</h2>
-<a asp-action="Create">Create New</a>
-<table class="table">
-    <tr>
-        <th>Make</th>
-        <th>Model</th>
-        <th>Year</th>
-        <th>Price/Day</th>
-        <th>Available</th>
-        <th></th>
-    </tr>
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>@item.Make</td>
-            <td>@item.Model</td>
-            <td>@item.Year</td>
-            <td>@item.PricePerDay</td>
-            <td>@item.IsAvailable</td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-    }
-</table>
+
+<div class="row mb-4">
+    <div class="col-md-8">
+        <h1 class="mb-0">Vehicles</h1>
+    </div>
+    <div class="col-md-4 text-end">
+        <a class="btn btn-success" asp-action="Create">+ Add Vehicle</a>
+    </div>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead class="table-primary">
+            <tr>
+                <th>Make</th>
+                <th>Model</th>
+                <th>Year</th>
+                <th>Price/Day</th>
+                <th>Availability</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var vehicle in Model)
+            {
+                <tr>
+                    <td>@vehicle.Make</td>
+                    <td>@vehicle.Model</td>
+                    <td>@vehicle.Year</td>
+                    <td><strong>$@vehicle.PricePerDay.ToString("F2")</strong></td>
+                    <td>
+                        @if (vehicle.IsAvailable)
+                        {
+                            <span class="badge bg-success">Available</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-danger">Not Available</span>
+                        }
+                    </td>
+                    <td>
+                        <a class="btn btn-sm btn-warning" asp-action="Edit" asp-route-id="@vehicle.Id">Edit</a>
+                        <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@vehicle.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

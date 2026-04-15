@@ -1,4 +1,4 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 public static class SeedData
 {
@@ -21,7 +21,7 @@ public static class SeedData
                     Model = "Camry",
                     Year = 2023,
                     PricePerDay = 75.00m,
-                    IsAvailable = true
+                    IsAvailable = false
                 },
                 new Vehicle
                 {
@@ -29,7 +29,7 @@ public static class SeedData
                     Model = "CR-V",
                     Year = 2023,
                     PricePerDay = 85.00m,
-                    IsAvailable = true
+                    IsAvailable = false
                 },
                 new Vehicle
                 {
@@ -37,7 +37,7 @@ public static class SeedData
                     Model = "Mustang",
                     Year = 2022,
                     PricePerDay = 95.00m,
-                    IsAvailable = true
+                    IsAvailable = false
                 },
                 new Vehicle
                 {
@@ -45,7 +45,7 @@ public static class SeedData
                     Model = "Silverado",
                     Year = 2023,
                     PricePerDay = 105.00m,
-                    IsAvailable = false
+                    IsAvailable = true
                 },
                 new Vehicle
                 {
@@ -124,29 +124,31 @@ public static class SeedData
             context.Reservations.AddRange(reservations);
             context.SaveChanges();
 
-            // Seed Billings
+            // Seed Billings with percentage-based tax (e.g., 12.5% tax rate)
+            decimal taxPercentage = 0.125m; // 12.5% tax rate
+            
             var billings = new Billing[]
             {
                 new Billing
                 {
                     ReservationId = 1,
-                    Tax = 28.00m,
+                    Tax = reservations[0].TotalCost * taxPercentage,
                     ExtraCharges = 0m,
-                    FinalAmount = 253.00m
+                    FinalAmount = reservations[0].TotalCost + (reservations[0].TotalCost * taxPercentage)
                 },
                 new Billing
                 {
                     ReservationId = 2,
-                    Tax = 31.00m,
+                    Tax = reservations[1].TotalCost * taxPercentage,
                     ExtraCharges = 15.00m,
-                    FinalAmount = 301.00m
+                    FinalAmount = reservations[1].TotalCost + (reservations[1].TotalCost * taxPercentage) + 15.00m
                 },
                 new Billing
                 {
                     ReservationId = 3,
-                    Tax = 35.00m,
+                    Tax = reservations[2].TotalCost * taxPercentage,
                     ExtraCharges = 0m,
-                    FinalAmount = 320.00m
+                    FinalAmount = reservations[2].TotalCost + (reservations[2].TotalCost * taxPercentage)
                 }
             };
 
@@ -155,9 +157,7 @@ public static class SeedData
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Seed data initialization failed: {ex.Message}");
-            Console.WriteLine($"Stack trace: {ex.StackTrace}");
-            throw;
+            Console.WriteLine($"✗ Seed data initialization failed: {ex.Message}");
         }
     }
 }

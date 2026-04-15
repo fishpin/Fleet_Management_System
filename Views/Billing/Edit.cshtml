@@ -1,0 +1,35 @@
+@model Billing
+
+<h2>Edit Invoice</h2>
+
+<form asp-action="Edit" method="post">
+    <div class="form-group">
+        <label asp-for="Id" class="control-label"></label>
+        <input asp-for="Id" class="form-control" readonly />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ReservationId" class="control-label"></label>
+        <input asp-for="ReservationId" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Tax" class="control-label"></label>
+        <input asp-for="Tax" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ExtraCharges" class="control-label"></label>
+        <input asp-for="ExtraCharges" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="FinalAmount" class="control-label"></label>
+        <input asp-for="FinalAmount" class="form-control" readonly />
+    </div>
+
+    <div class="form-group mt-3">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a class="btn btn-secondary" asp-action="Index">Cancel</a>
+    </div>
+</form>
