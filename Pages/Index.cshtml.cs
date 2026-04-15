@@ -2,10 +2,9 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.ComponentModel.DataAnnotations;
 
 [AllowAnonymous]
-[ValidateAntiForgeryToken]
+[IgnoreAntiforgeryToken]
 public class IndexModel : PageModel
 {
     private readonly SignInManager<IdentityUser> _signInManager;
@@ -18,18 +17,10 @@ public class IndexModel : PageModel
     }
 
     [BindProperty]
-    public LoginInputModel Input { get; set; } = new();
+    public string Email { get; set; }
 
-    public class LoginInputModel
-    {
-        [Required(ErrorMessage = "Email is required")]
-        [EmailAddress(ErrorMessage = "Please enter a valid email")]
-        public string Email { get; set; }
-
-        [Required(ErrorMessage = "Password is required")]
-        [DataType(DataType.Password)]
-        public string Password { get; set; }
-    }
+    [BindProperty]
+    public string Password { get; set; }
 
     public async Task OnGetAsync()
     {
@@ -42,21 +33,24 @@ public class IndexModel : PageModel
 
     public async Task<IActionResult> OnPostAsync()
     {
-        if (!ModelState.IsValid)
+        if (string.IsNullOrEmpty(Email) || string.IsNullOrEmpty(Password))
         {
+            ModelState.Clear();
+            ModelState.AddModelError(string.Empty, "Email and password are required.");
             return Page();
         }
 
-        var user = await _userManager.FindByEmailAsync(Input.Email);
+        var user = await _userManager.FindByEmailAsync(Email);
         if (user == null)
         {
+            ModelState.Clear();
             ModelState.AddModelError(string.Empty, "Invalid email or password.");
             return Page();
         }
 
         var result = await _signInManager.PasswordSignInAsync(
             user.UserName, 
-            Input.Password, 
+            Password, 
             isPersistent: false,
             lockoutOnFailure: false);
 
@@ -65,6 +59,7 @@ public class IndexModel : PageModel
             return Redirect("/Vehicle/Index");
         }
 
+        ModelState.Clear();
         ModelState.AddModelError(string.Empty, "Invalid email or password.");
         return Page();
     }

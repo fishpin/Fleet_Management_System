@@ -1,0 +1,69 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Fleet Management</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-6">
+                <div class="card shadow-lg">
+                    <div class="card-body p-5">
+                        <h1 class="card-title text-center mb-4">🚗 Create Account</h1>
+
+                        @if (!string.IsNullOrEmpty(Model.Message))
+                        {
+                            <div class="alert alert-@Model.MessageType" role="alert">
+                                @Model.Message
+                            </div>
+                        }
+
+                        <form method="post">
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email Address</label>
+                                <input type="email" id="email" name="Email" class="form-control" placeholder="Enter your email" required />
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" id="password" name="Password" class="form-control" placeholder="Enter a password (min 6 characters)" required />
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="confirm" class="form-label">Confirm Password</label>
+                                <input type="password" id="confirm" name="ConfirmPassword" class="form-control" placeholder="Confirm your password" required />
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="code" class="form-label">Staff Code</label>
+                                <input type="text" id="code" name="StaffCode" class="form-control" placeholder="Enter the staff code" required />
+                                <small class="form-text text-muted">Contact your administrator for the staff code</small>
+                            </div>
+
+                            <button type="submit" class="btn btn-success w-100">Create Account</button>
+                        </form>
+
+                        <hr class="my-4" />
+
+                        <div class="text-center">
+                            <p>Already have an account? <a href="/" class="fw-bold">Sign In Here</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

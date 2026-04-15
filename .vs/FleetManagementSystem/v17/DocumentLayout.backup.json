@@ -3,6 +3,26 @@
   "WorkspaceRootPath": "C:\\Users\\cassy\\OneDrive\\Bow Valley\\Term 2\\ASP.NET\\Fleet_Management_System\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{A32F7E41-CDBA-4611-86C6-50755A44990A}|FleetManagementSystem.csproj|c:\\users\\cassy\\onedrive\\bow valley\\term 2\\asp.net\\fleet_management_system\\pages\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A32F7E41-CDBA-4611-86C6-50755A44990A}|FleetManagementSystem.csproj|solutionrelative:pages\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A32F7E41-CDBA-4611-86C6-50755A44990A}|FleetManagementSystem.csproj|c:\\users\\cassy\\onedrive\\bow valley\\term 2\\asp.net\\fleet_management_system\\pages\\register.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A32F7E41-CDBA-4611-86C6-50755A44990A}|FleetManagementSystem.csproj|solutionrelative:pages\\register.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A32F7E41-CDBA-4611-86C6-50755A44990A}|FleetManagementSystem.csproj|c:\\users\\cassy\\onedrive\\bow valley\\term 2\\asp.net\\fleet_management_system\\pages\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A32F7E41-CDBA-4611-86C6-50755A44990A}|FleetManagementSystem.csproj|solutionrelative:pages\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A32F7E41-CDBA-4611-86C6-50755A44990A}|FleetManagementSystem.csproj|c:\\users\\cassy\\onedrive\\bow valley\\term 2\\asp.net\\fleet_management_system\\pages\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A32F7E41-CDBA-4611-86C6-50755A44990A}|FleetManagementSystem.csproj|solutionrelative:pages\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A32F7E41-CDBA-4611-86C6-50755A44990A}|FleetManagementSystem.csproj|c:\\users\\cassy\\onedrive\\bow valley\\term 2\\asp.net\\fleet_management_system\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A32F7E41-CDBA-4611-86C6-50755A44990A}|FleetManagementSystem.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A32F7E41-CDBA-4611-86C6-50755A44990A}|FleetManagementSystem.csproj|c:\\users\\cassy\\onedrive\\bow valley\\term 2\\asp.net\\fleet_management_system\\views\\billing\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{A32F7E41-CDBA-4611-86C6-50755A44990A}|FleetManagementSystem.csproj|solutionrelative:views\\billing\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
@@ -71,16 +91,8 @@
       "RelativeMoniker": "D:0:0:{A32F7E41-CDBA-4611-86C6-50755A44990A}|FleetManagementSystem.csproj|solutionrelative:pages\\logout.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A32F7E41-CDBA-4611-86C6-50755A44990A}|FleetManagementSystem.csproj|c:\\users\\cassy\\onedrive\\bow valley\\term 2\\asp.net\\fleet_management_system\\pages\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A32F7E41-CDBA-4611-86C6-50755A44990A}|FleetManagementSystem.csproj|solutionrelative:pages\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A32F7E41-CDBA-4611-86C6-50755A44990A}|FleetManagementSystem.csproj|c:\\users\\cassy\\onedrive\\bow valley\\term 2\\asp.net\\fleet_management_system\\controllers\\vehiclecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A32F7E41-CDBA-4611-86C6-50755A44990A}|FleetManagementSystem.csproj|solutionrelative:controllers\\vehiclecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A32F7E41-CDBA-4611-86C6-50755A44990A}|FleetManagementSystem.csproj|c:\\users\\cassy\\onedrive\\bow valley\\term 2\\asp.net\\fleet_management_system\\pages\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A32F7E41-CDBA-4611-86C6-50755A44990A}|FleetManagementSystem.csproj|solutionrelative:pages\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A32F7E41-CDBA-4611-86C6-50755A44990A}|FleetManagementSystem.csproj|c:\\users\\cassy\\onedrive\\bow valley\\term 2\\asp.net\\fleet_management_system\\data\\seedusers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -106,7 +118,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -114,72 +126,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\cassy\\OneDrive\\Bow Valley\\Term 2\\ASP.NET\\Fleet_Management_System\\Views\\Vehicle\\Index.cshtml",
-              "RelativeDocumentMoniker": "Views\\Vehicle\\Index.cshtml",
-              "ToolTip": "C:\\Users\\cassy\\OneDrive\\Bow Valley\\Term 2\\ASP.NET\\Fleet_Management_System\\Views\\Vehicle\\Index.cshtml",
-              "RelativeToolTip": "Views\\Vehicle\\Index.cshtml",
-              "ViewState": "AgIAABIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "Register.cshtml",
+              "DocumentMoniker": "C:\\Users\\cassy\\OneDrive\\Bow Valley\\Term 2\\ASP.NET\\Fleet_Management_System\\Pages\\Register.cshtml",
+              "RelativeDocumentMoniker": "Pages\\Register.cshtml",
+              "ToolTip": "C:\\Users\\cassy\\OneDrive\\Bow Valley\\Term 2\\ASP.NET\\Fleet_Management_System\\Pages\\Register.cshtml",
+              "RelativeToolTip": "Pages\\Register.cshtml",
+              "ViewState": "AgIAADwAAAAAAAAAAAAAAEQAAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-04-15T05:38:41.687Z",
+              "WhenOpened": "2026-04-15T05:57:02.359Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\cassy\\OneDrive\\Bow Valley\\Term 2\\ASP.NET\\Fleet_Management_System\\Views\\Reservation\\Index.cshtml",
-              "RelativeDocumentMoniker": "Views\\Reservation\\Index.cshtml",
-              "ToolTip": "C:\\Users\\cassy\\OneDrive\\Bow Valley\\Term 2\\ASP.NET\\Fleet_Management_System\\Views\\Reservation\\Index.cshtml",
-              "RelativeToolTip": "Views\\Reservation\\Index.cshtml",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-04-15T05:25:03.025Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "Delete.cshtml",
-              "DocumentMoniker": "C:\\Users\\cassy\\OneDrive\\Bow Valley\\Term 2\\ASP.NET\\Fleet_Management_System\\Views\\Customer\\Delete.cshtml",
-              "RelativeDocumentMoniker": "Views\\Customer\\Delete.cshtml",
-              "ToolTip": "C:\\Users\\cassy\\OneDrive\\Bow Valley\\Term 2\\ASP.NET\\Fleet_Management_System\\Views\\Customer\\Delete.cshtml",
-              "RelativeToolTip": "Views\\Customer\\Delete.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAHAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-04-15T05:23:33.253Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\cassy\\OneDrive\\Bow Valley\\Term 2\\ASP.NET\\Fleet_Management_System\\Views\\Customer\\Index.cshtml",
-              "RelativeDocumentMoniker": "Views\\Customer\\Index.cshtml",
-              "ToolTip": "C:\\Users\\cassy\\OneDrive\\Bow Valley\\Term 2\\ASP.NET\\Fleet_Management_System\\Views\\Customer\\Index.cshtml",
-              "RelativeToolTip": "Views\\Customer\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-04-15T05:23:24.98Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "CustomerController.cs",
-              "DocumentMoniker": "C:\\Users\\cassy\\OneDrive\\Bow Valley\\Term 2\\ASP.NET\\Fleet_Management_System\\Controllers\\CustomerController.cs",
-              "RelativeDocumentMoniker": "Controllers\\CustomerController.cs",
-              "ToolTip": "C:\\Users\\cassy\\OneDrive\\Bow Valley\\Term 2\\ASP.NET\\Fleet_Management_System\\Controllers\\CustomerController.cs",
-              "RelativeToolTip": "Controllers\\CustomerController.cs",
-              "ViewState": "AgIAADAAAAAAAAAAAAAuwEQAAAABAAAAAAAAAA==",
+              "Title": "Register.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\cassy\\OneDrive\\Bow Valley\\Term 2\\ASP.NET\\Fleet_Management_System\\Pages\\Register.cshtml.cs",
+              "RelativeDocumentMoniker": "Pages\\Register.cshtml.cs",
+              "ToolTip": "C:\\Users\\cassy\\OneDrive\\Bow Valley\\Term 2\\ASP.NET\\Fleet_Management_System\\Pages\\Register.cshtml.cs",
+              "RelativeToolTip": "Pages\\Register.cshtml.cs",
+              "ViewState": "AgIAAE4AAAAAAAAAAAAvwAMAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-15T05:23:14.123Z",
+              "WhenOpened": "2026-04-15T05:56:35.725Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 16,
               "Title": "Delete.cshtml",
               "DocumentMoniker": "C:\\Users\\cassy\\OneDrive\\Bow Valley\\Term 2\\ASP.NET\\Fleet_Management_System\\Views\\Billing\\Delete.cshtml",
               "RelativeDocumentMoniker": "Views\\Billing\\Delete.cshtml",
@@ -187,12 +160,11 @@
               "RelativeToolTip": "Views\\Billing\\Delete.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-04-15T05:20:53.417Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-15T05:20:53.417Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 10,
               "Title": "SeedData.cs",
               "DocumentMoniker": "C:\\Users\\cassy\\OneDrive\\Bow Valley\\Term 2\\ASP.NET\\Fleet_Management_System\\Data\\SeedData.cs",
               "RelativeDocumentMoniker": "Data\\SeedData.cs",
@@ -200,25 +172,24 @@
               "RelativeToolTip": "Data\\SeedData.cs",
               "ViewState": "AgIAAI0AAAAAAAAAAAArwKIAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-13T23:01:49.309Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-13T23:01:49.309Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 5,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\cassy\\OneDrive\\Bow Valley\\Term 2\\ASP.NET\\Fleet_Management_System\\Views\\Billing\\Index.cshtml",
               "RelativeDocumentMoniker": "Views\\Billing\\Index.cshtml",
               "ToolTip": "C:\\Users\\cassy\\OneDrive\\Bow Valley\\Term 2\\ASP.NET\\Fleet_Management_System\\Views\\Billing\\Index.cshtml",
               "RelativeToolTip": "Views\\Billing\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2026-04-15T05:20:28.47Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 13,
               "Title": "ReservationController.cs",
               "DocumentMoniker": "C:\\Users\\cassy\\OneDrive\\Bow Valley\\Term 2\\ASP.NET\\Fleet_Management_System\\Controllers\\ReservationController.cs",
               "RelativeDocumentMoniker": "Controllers\\ReservationController.cs",
@@ -226,12 +197,86 @@
               "RelativeToolTip": "Controllers\\ReservationController.cs",
               "ViewState": "AgIAAEQAAAAAAAAAAAAuwAEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-15T05:24:50.239Z",
+              "WhenOpened": "2026-04-15T05:24:50.239Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\cassy\\OneDrive\\Bow Valley\\Term 2\\ASP.NET\\Fleet_Management_System\\Pages\\Index.cshtml",
+              "RelativeDocumentMoniker": "Pages\\Index.cshtml",
+              "ToolTip": "C:\\Users\\cassy\\OneDrive\\Bow Valley\\Term 2\\ASP.NET\\Fleet_Management_System\\Pages\\Index.cshtml",
+              "RelativeToolTip": "Pages\\Index.cshtml",
+              "ViewState": "AgIAABkAAAAAAAAAAAAtwDoAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-15T04:22:02.594Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Index.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\cassy\\OneDrive\\Bow Valley\\Term 2\\ASP.NET\\Fleet_Management_System\\Pages\\Index.cshtml.cs",
+              "RelativeDocumentMoniker": "Pages\\Index.cshtml.cs",
+              "ToolTip": "C:\\Users\\cassy\\OneDrive\\Bow Valley\\Term 2\\ASP.NET\\Fleet_Management_System\\Pages\\Index.cshtml.cs",
+              "RelativeToolTip": "Pages\\Index.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-15T04:21:49.601Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "CustomerController.cs",
+              "DocumentMoniker": "C:\\Users\\cassy\\OneDrive\\Bow Valley\\Term 2\\ASP.NET\\Fleet_Management_System\\Controllers\\CustomerController.cs",
+              "RelativeDocumentMoniker": "Controllers\\CustomerController.cs",
+              "ToolTip": "C:\\Users\\cassy\\OneDrive\\Bow Valley\\Term 2\\ASP.NET\\Fleet_Management_System\\Controllers\\CustomerController.cs",
+              "RelativeToolTip": "Controllers\\CustomerController.cs",
+              "ViewState": "AgIAADAAAAAAAAAAAAAuwEQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-15T05:23:14.123Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\cassy\\OneDrive\\Bow Valley\\Term 2\\ASP.NET\\Fleet_Management_System\\Views\\Customer\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Customer\\Index.cshtml",
+              "ToolTip": "C:\\Users\\cassy\\OneDrive\\Bow Valley\\Term 2\\ASP.NET\\Fleet_Management_System\\Views\\Customer\\Index.cshtml",
+              "RelativeToolTip": "Views\\Customer\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-15T05:23:24.98Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 4,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\cassy\\OneDrive\\Bow Valley\\Term 2\\ASP.NET\\Fleet_Management_System\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Users\\cassy\\OneDrive\\Bow Valley\\Term 2\\ASP.NET\\Fleet_Management_System\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-04-15T05:50:18.516Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Delete.cshtml",
+              "DocumentMoniker": "C:\\Users\\cassy\\OneDrive\\Bow Valley\\Term 2\\ASP.NET\\Fleet_Management_System\\Views\\Customer\\Delete.cshtml",
+              "RelativeDocumentMoniker": "Views\\Customer\\Delete.cshtml",
+              "ToolTip": "C:\\Users\\cassy\\OneDrive\\Bow Valley\\Term 2\\ASP.NET\\Fleet_Management_System\\Views\\Customer\\Delete.cshtml",
+              "RelativeToolTip": "Views\\Customer\\Delete.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-15T05:23:33.253Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "C:\\Users\\cassy\\OneDrive\\Bow Valley\\Term 2\\ASP.NET\\Fleet_Management_System\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
@@ -239,12 +284,11 @@
               "RelativeToolTip": "Views\\Shared\\_Layout.cshtml",
               "ViewState": "AgIAADcAAAAAAAAAAAAiwE8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-04-15T04:58:14.23Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-15T04:58:14.23Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 11,
               "Title": "Delete.cshtml",
               "DocumentMoniker": "C:\\Users\\cassy\\OneDrive\\Bow Valley\\Term 2\\ASP.NET\\Fleet_Management_System\\Views\\Reservation\\Delete.cshtml",
               "RelativeDocumentMoniker": "Views\\Reservation\\Delete.cshtml",
@@ -252,12 +296,35 @@
               "RelativeToolTip": "Views\\Reservation\\Delete.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-04-15T05:25:15.042Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-15T05:25:15.042Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 6,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\cassy\\OneDrive\\Bow Valley\\Term 2\\ASP.NET\\Fleet_Management_System\\Views\\Reservation\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Reservation\\Index.cshtml",
+              "ToolTip": "C:\\Users\\cassy\\OneDrive\\Bow Valley\\Term 2\\ASP.NET\\Fleet_Management_System\\Views\\Reservation\\Index.cshtml",
+              "RelativeToolTip": "Views\\Reservation\\Index.cshtml",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-15T05:25:03.025Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\cassy\\OneDrive\\Bow Valley\\Term 2\\ASP.NET\\Fleet_Management_System\\Views\\Vehicle\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Vehicle\\Index.cshtml",
+              "ToolTip": "C:\\Users\\cassy\\OneDrive\\Bow Valley\\Term 2\\ASP.NET\\Fleet_Management_System\\Views\\Vehicle\\Index.cshtml",
+              "RelativeToolTip": "Views\\Vehicle\\Index.cshtml",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-15T05:38:41.687Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
               "Title": "Edit.cshtml",
               "DocumentMoniker": "C:\\Users\\cassy\\OneDrive\\Bow Valley\\Term 2\\ASP.NET\\Fleet_Management_System\\Views\\Reservation\\Edit.cshtml",
               "RelativeDocumentMoniker": "Views\\Reservation\\Edit.cshtml",
@@ -265,12 +332,11 @@
               "RelativeToolTip": "Views\\Reservation\\Edit.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAADMAAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-04-15T05:25:10.615Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-15T05:25:10.615Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 17,
               "Title": "Edit.cshtml",
               "DocumentMoniker": "C:\\Users\\cassy\\OneDrive\\Bow Valley\\Term 2\\ASP.NET\\Fleet_Management_System\\Views\\Billing\\Edit.cshtml",
               "RelativeDocumentMoniker": "Views\\Billing\\Edit.cshtml",
@@ -278,12 +344,11 @@
               "RelativeToolTip": "Views\\Billing\\Edit.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-04-15T05:20:39.553Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-15T05:20:39.553Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 18,
               "Title": "BillingController.cs",
               "DocumentMoniker": "C:\\Users\\cassy\\OneDrive\\Bow Valley\\Term 2\\ASP.NET\\Fleet_Management_System\\Controllers\\BillingController.cs",
               "RelativeDocumentMoniker": "Controllers\\BillingController.cs",
@@ -291,12 +356,11 @@
               "RelativeToolTip": "Controllers\\BillingController.cs",
               "ViewState": "AgIAADMAAAAAAAAAAAAAwEUAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-15T05:20:15.586Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-15T05:20:15.586Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 20,
               "Title": "_LoginPartial.cshtml",
               "DocumentMoniker": "C:\\Users\\cassy\\OneDrive\\Bow Valley\\Term 2\\ASP.NET\\Fleet_Management_System\\Views\\Shared\\_LoginPartial.cshtml",
               "RelativeDocumentMoniker": "Views\\Shared\\_LoginPartial.cshtml",
@@ -308,7 +372,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 25,
               "Title": "Debug.cshtml",
               "DocumentMoniker": "C:\\Users\\cassy\\OneDrive\\Bow Valley\\Term 2\\ASP.NET\\Fleet_Management_System\\Pages\\Debug.cshtml",
               "RelativeDocumentMoniker": "Pages\\Debug.cshtml",
@@ -320,7 +384,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 26,
               "Title": "Debug.cshtml.cs",
               "DocumentMoniker": "C:\\Users\\cassy\\OneDrive\\Bow Valley\\Term 2\\ASP.NET\\Fleet_Management_System\\Pages\\Debug.cshtml.cs",
               "RelativeDocumentMoniker": "Pages\\Debug.cshtml.cs",
@@ -332,7 +396,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 22,
               "Title": "VehicleController.cs",
               "DocumentMoniker": "C:\\Users\\cassy\\OneDrive\\Bow Valley\\Term 2\\ASP.NET\\Fleet_Management_System\\Controllers\\VehicleController.cs",
               "RelativeDocumentMoniker": "Controllers\\VehicleController.cs",
@@ -344,7 +408,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 23,
               "Title": "SeedUsers.cs",
               "DocumentMoniker": "C:\\Users\\cassy\\OneDrive\\Bow Valley\\Term 2\\ASP.NET\\Fleet_Management_System\\Data\\SeedUsers.cs",
               "RelativeDocumentMoniker": "Data\\SeedUsers.cs",
@@ -357,30 +421,6 @@
             {
               "$type": "Document",
               "DocumentIndex": 19,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\cassy\\OneDrive\\Bow Valley\\Term 2\\ASP.NET\\Fleet_Management_System\\Pages\\Index.cshtml",
-              "RelativeDocumentMoniker": "Pages\\Index.cshtml",
-              "ToolTip": "C:\\Users\\cassy\\OneDrive\\Bow Valley\\Term 2\\ASP.NET\\Fleet_Management_System\\Pages\\Index.cshtml",
-              "RelativeToolTip": "Pages\\Index.cshtml",
-              "ViewState": "AgIAACMAAAAAAAAAAAASwDsAAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-04-15T04:22:02.594Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "Index.cshtml.cs",
-              "DocumentMoniker": "C:\\Users\\cassy\\OneDrive\\Bow Valley\\Term 2\\ASP.NET\\Fleet_Management_System\\Pages\\Index.cshtml.cs",
-              "RelativeDocumentMoniker": "Pages\\Index.cshtml.cs",
-              "ToolTip": "C:\\Users\\cassy\\OneDrive\\Bow Valley\\Term 2\\ASP.NET\\Fleet_Management_System\\Pages\\Index.cshtml.cs",
-              "RelativeToolTip": "Pages\\Index.cshtml.cs",
-              "ViewState": "AgIAADEAAAAAAAAAAAAEwEYAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-15T04:21:49.601Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\cassy\\OneDrive\\Bow Valley\\Term 2\\ASP.NET\\Fleet_Management_System\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
@@ -388,12 +428,11 @@
               "RelativeToolTip": "Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-13T23:02:00.647Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-13T23:02:00.647Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 21,
               "Title": "Logout.cshtml.cs",
               "DocumentMoniker": "C:\\Users\\cassy\\OneDrive\\Bow Valley\\Term 2\\ASP.NET\\Fleet_Management_System\\Pages\\Logout.cshtml.cs",
               "RelativeDocumentMoniker": "Pages\\Logout.cshtml.cs",
@@ -405,7 +444,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 24,
               "Title": "Logout.cshtml",
               "DocumentMoniker": "C:\\Users\\cassy\\OneDrive\\Bow Valley\\Term 2\\ASP.NET\\Fleet_Management_System\\Pages\\Logout.cshtml",
               "RelativeDocumentMoniker": "Pages\\Logout.cshtml",
