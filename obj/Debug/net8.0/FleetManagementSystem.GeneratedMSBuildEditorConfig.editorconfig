@@ -9,85 +9,101 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = FleetManagementSystem
 build_property.RootNamespace = FleetManagementSystem
-build_property.ProjectDir = C:\Users\gokan\source\repos\FleetManagementSystem\
+build_property.ProjectDir = C:\Users\cassy\OneDrive\Bow Valley\Term 2\ASP.NET\Fleet_Management_System\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\gokan\source\repos\FleetManagementSystem
+build_property.MSBuildProjectDirectory = C:\Users\cassy\OneDrive\Bow Valley\Term 2\ASP.NET\Fleet_Management_System
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 8.0
 build_property.EnableCodeStyleSeverity = 
 
-[C:/Users/gokan/source/repos/FleetManagementSystem/Views/Billing/Create.cshtml]
+[C:/Users/cassy/OneDrive/Bow Valley/Term 2/ASP.NET/Fleet_Management_System/Pages/Debug.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGVidWcuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/cassy/OneDrive/Bow Valley/Term 2/ASP.NET/Fleet_Management_System/Pages/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/cassy/OneDrive/Bow Valley/Term 2/ASP.NET/Fleet_Management_System/Pages/Logout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9nb3V0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/cassy/OneDrive/Bow Valley/Term 2/ASP.NET/Fleet_Management_System/Views/Billing/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmlsbGluZ1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/gokan/source/repos/FleetManagementSystem/Views/Billing/Index.cshtml]
+[C:/Users/cassy/OneDrive/Bow Valley/Term 2/ASP.NET/Fleet_Management_System/Views/Billing/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmlsbGluZ1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/gokan/source/repos/FleetManagementSystem/Views/Customer/Create.cshtml]
+[C:/Users/cassy/OneDrive/Bow Valley/Term 2/ASP.NET/Fleet_Management_System/Views/Customer/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/gokan/source/repos/FleetManagementSystem/Views/Customer/Edit.cshtml]
+[C:/Users/cassy/OneDrive/Bow Valley/Term 2/ASP.NET/Fleet_Management_System/Views/Customer/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/gokan/source/repos/FleetManagementSystem/Views/Customer/Index.cshtml]
+[C:/Users/cassy/OneDrive/Bow Valley/Term 2/ASP.NET/Fleet_Management_System/Views/Customer/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/gokan/source/repos/FleetManagementSystem/Views/Home/Index.cshtml]
+[C:/Users/cassy/OneDrive/Bow Valley/Term 2/ASP.NET/Fleet_Management_System/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/gokan/source/repos/FleetManagementSystem/Views/Home/Privacy.cshtml]
+[C:/Users/cassy/OneDrive/Bow Valley/Term 2/ASP.NET/Fleet_Management_System/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/gokan/source/repos/FleetManagementSystem/Views/Reservation/Create.cshtml]
+[C:/Users/cassy/OneDrive/Bow Valley/Term 2/ASP.NET/Fleet_Management_System/Views/Reservation/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzZXJ2YXRpb25cQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/gokan/source/repos/FleetManagementSystem/Views/Reservation/Index.cshtml]
+[C:/Users/cassy/OneDrive/Bow Valley/Term 2/ASP.NET/Fleet_Management_System/Views/Reservation/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzZXJ2YXRpb25cSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/gokan/source/repos/FleetManagementSystem/Views/Shared/Error.cshtml]
+[C:/Users/cassy/OneDrive/Bow Valley/Term 2/ASP.NET/Fleet_Management_System/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/gokan/source/repos/FleetManagementSystem/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/cassy/OneDrive/Bow Valley/Term 2/ASP.NET/Fleet_Management_System/Views/Shared/_LoginPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/cassy/OneDrive/Bow Valley/Term 2/ASP.NET/Fleet_Management_System/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/gokan/source/repos/FleetManagementSystem/Views/Vehicle/Create.cshtml]
+[C:/Users/cassy/OneDrive/Bow Valley/Term 2/ASP.NET/Fleet_Management_System/Views/Vehicle/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVoaWNsZVxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/gokan/source/repos/FleetManagementSystem/Views/Vehicle/Delete.cshtml]
+[C:/Users/cassy/OneDrive/Bow Valley/Term 2/ASP.NET/Fleet_Management_System/Views/Vehicle/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVoaWNsZVxEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/gokan/source/repos/FleetManagementSystem/Views/Vehicle/Edit.cshtml]
+[C:/Users/cassy/OneDrive/Bow Valley/Term 2/ASP.NET/Fleet_Management_System/Views/Vehicle/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVoaWNsZVxFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/gokan/source/repos/FleetManagementSystem/Views/Vehicle/Index.cshtml]
+[C:/Users/cassy/OneDrive/Bow Valley/Term 2/ASP.NET/Fleet_Management_System/Views/Vehicle/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVoaWNsZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/gokan/source/repos/FleetManagementSystem/Views/_ViewImports.cshtml]
+[C:/Users/cassy/OneDrive/Bow Valley/Term 2/ASP.NET/Fleet_Management_System/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/gokan/source/repos/FleetManagementSystem/Views/_ViewStart.cshtml]
+[C:/Users/cassy/OneDrive/Bow Valley/Term 2/ASP.NET/Fleet_Management_System/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/gokan/source/repos/FleetManagementSystem/Views/Shared/_Layout.cshtml]
+[C:/Users/cassy/OneDrive/Bow Valley/Term 2/ASP.NET/Fleet_Management_System/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-zku24gr304
