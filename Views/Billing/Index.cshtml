@@ -1,14 +1,39 @@
 ﻿@model IEnumerable<Billing>
-<h2>Billing</h2>
-<a asp-action="Create">Create New</a>
-<table class="table">
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>@item.ReservationId</td>
-            <td>@item.Tax</td>
-            <td>@item.ExtraCharges</td>
-            <td>@item.FinalAmount</td>
-        </tr>
-    }
-</table>
+
+<div class="row mb-4">
+    <div class="col-md-8">
+        <h1 class="mb-0">Billing</h1>
+    </div>
+    <div class="col-md-4 text-end">
+        <a class="btn btn-success" asp-action="Create">+ Add Invoice</a>
+    </div>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead class="table-primary">
+            <tr>
+                <th>Reservation ID</th>
+                <th>Tax (12.5%)</th>
+                <th>Extra Charges</th>
+                <th>Final Amount</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.ReservationId</td>
+                    <td>$@item.Tax.ToString("F2")</td>
+                    <td>$@item.ExtraCharges.ToString("F2")</td>
+                    <td><strong class="text-success">$@item.FinalAmount.ToString("F2")</strong></td>
+                    <td>
+                        <a class="btn btn-sm btn-warning" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                        <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
