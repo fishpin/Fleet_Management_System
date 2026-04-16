@@ -1,22 +1,182 @@
-﻿@model Reservation
-<h2>Create Reservation</h2>
-<form asp-action="Create" method="post">
-    <select asp-for="VehicleId">
-        @foreach (var v in ViewBag.Vehicles)
+@model Reservation
+@using System.Text.Json
+
+@{
+    ViewData["Title"] = "Book a Vehicle";
+    var vehicles = ((IEnumerable<Vehicle>)ViewBag.Vehicles).ToList();
+    var customers = ((IEnumerable<Customer>)ViewBag.Customers).ToList();
+}
+
+<div class="book-wrapper">
+    <div class="book-card">
+        <h5 class="book-title">Book</h5>
+
+        <form asp-action="Create" method="post">
+
+            <div asp-validation-summary="All" class="alert dashboard-alert mb-3" style="display:@(ViewData.ModelState.IsValid ? "none" : "block")"></div>
+
+            @* Top: car preview + dates *@
+            <div class="book-top">
+                <div class="book-car-thumb">🚗</div>
+                <div class="book-car-info">
+                    <div class="book-car-name" id="carName">Select a vehicle below</div>
+                    <div class="book-car-detail" id="carDetail">—</div>
+                    <div class="book-dates-row">
+                        <div>
+                            <label class="book-field-label">From Date</label>
+                            <input asp-for="StartDate" type="date" class="form-control form-control-sm"
+                                   value="@DateTime.Today.ToString("yyyy-MM-dd")"
+                                   onchange="updatePricing()" />
+                        </div>
+                        <div>
+                            <label class="book-field-label">To Date</label>
+                            <input asp-for="EndDate" type="date" class="form-control form-control-sm"
+                                   value="@DateTime.Today.ToString("yyyy-MM-dd")"
+                                   onchange="updatePricing()" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @* Vehicle select *@
+            <div class="mb-3">
+                <label class="book-field-label">Vehicle</label>
+                <select asp-for="VehicleId" id="vehicleSelect" class="form-select form-select-sm"
+                        onchange="updatePreview()">
+                    <option value="">Choose a vehicle...</option>
+                    @foreach (var v in vehicles)
+                    {
+                        <option value="@v.Id" data-price="@v.PricePerDay" data-year="@v.Year">
+                            @v.Make @v.Model
+                        </option>
+                    }
+                </select>
+            </div>
+
+            @* Customer + Insurance *@
+            <div class="book-mid-row">
+                <div class="flex-grow-1">
+                    <label class="book-field-label">Select Customer</label>
+                    <select asp-for="CustomerId" class="form-select form-select-sm">
+                        <option value="">Choose a customer...</option>
+                        @foreach (var c in customers)
+                        {
+                            <option value="@c.Id">@c.FullName</option>
+                        }
+                    </select>
+                </div>
+                <div class="book-insurance">
+                    <label class="book-field-label">Insurance Coverage</label>
+                    <div class="d-flex align-items-center gap-2 mt-1">
+                        <input type="checkbox" id="insuranceCheck" name="IncludesInsurance" value="true"
+                               class="form-check-input mt-0" onchange="updatePricing()" />
+                        <span class="form-hint">+$25/day</span>
+                    </div>
+                </div>
+            </div>
+
+            @* Price breakdown *@
+            <div class="book-pricing">
+                <div class="pricing-row">
+                    <span>Number of Days</span>
+                    <span id="daysDisplay" class="pricing-value">—</span>
+                </div>
+                <div class="pricing-row">
+                    <span>Price / Day</span>
+                    <span id="priceDisplay" class="pricing-value">—</span>
+                </div>
+                <div class="pricing-row" id="insuranceRow" style="display:none;">
+                    <span>Additional Charge — Insurance</span>
+                    <span class="pricing-value">$25.00 / Day</span>
+                </div>
+                <div class="pricing-row">
+                    <span>Tax (12.5%)</span>
+                    <span id="taxDisplay" class="pricing-value">—</span>
+                </div>
+                <div class="pricing-row pricing-total">
+                    <span>Total</span>
+                    <span id="totalDisplay">—</span>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-end gap-2 mt-4">
+                <a asp-action="Index" class="btn btn-secondary btn-sm">Cancel</a>
+                <button type="submit" class="btn btn-primary btn-sm px-4">Book</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+    var vehicleData = {
+        @foreach (var v in vehicles)
         {
-            <option value="@v.Id">@v.Make @v.Model</option>
+            @:@v.Id: { name: "@v.Make @v.Model", year: "@v.Year", price: @v.PricePerDay },
         }
-    </select>
+    };
 
-    <select asp-for="CustomerId">
-        @foreach (var c in ViewBag.Customers)
-        {
-            <option value="@c.Id">@c.FullName</option>
+    var reservations = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(ViewBag.Reservations));
+
+    document.addEventListener('DOMContentLoaded', updatePreview);
+
+    function filterVehicleOptions() {
+        var from = document.querySelector('[name="StartDate"]').value;
+        var to   = document.querySelector('[name="EndDate"]').value;
+        var select = document.getElementById('vehicleSelect');
+
+        Array.from(select.options).forEach(function(opt) {
+            if (!opt.value) return;
+            var vid = parseInt(opt.value);
+            var booked = from && to && reservations.some(function(r) {
+                if (r.vehicleId !== vid) return false;
+                var s = new Date(r.start), e = new Date(r.end);
+                return s < new Date(to) && e > new Date(from);
+            });
+            opt.disabled = booked;
+            if (booked && parseInt(select.value) === vid) {
+                select.value = '';
+                updatePreview();
+            }
+        });
+    }
+
+    function updatePreview() {
+        var id = document.getElementById('vehicleSelect').value;
+        var v = vehicleData[id];
+        document.getElementById('carName').textContent = v ? v.name : 'Select a vehicle below';
+        document.getElementById('carDetail').textContent = v ? v.year : '—';
+        updatePricing();
+    }
+
+    function updatePricing() {
+        filterVehicleOptions();
+        var id = document.getElementById('vehicleSelect').value;
+        var from = document.querySelector('[name="StartDate"]').value;
+        var to = document.querySelector('[name="EndDate"]').value;
+        var insured = document.getElementById('insuranceCheck').checked;
+        var v = vehicleData[id];
+
+        if (!v || !from || !to || new Date(to) <= new Date(from)) {
+            ['daysDisplay', 'priceDisplay', 'taxDisplay', 'totalDisplay']
+                .forEach(function (x) { document.getElementById(x).textContent = '—'; });
+            document.getElementById('insuranceRow').style.display = 'none';
+            return;
         }
-    </select>
 
-    <input asp-for="StartDate" type="date" />
-    <input asp-for="EndDate" type="date" />
+        var days = Math.round((new Date(to) - new Date(from)) / 86400000);
+        var base = parseFloat(v.price);
+        var ins = insured ? @BusinessRules.InsurancePerDay : 0;
+        var subtotal = (base + ins) * days;
+        var tax = subtotal * @BusinessRules.TaxRate;
+        var total = subtotal + tax;
 
-    <button type="submit">Save</button>
-</form>
+        document.getElementById('daysDisplay').textContent = days + (days === 1 ? ' Day' : ' Days');
+        document.getElementById('priceDisplay').textContent = '$' + base.toFixed(2) + ' / Day';
+        document.getElementById('insuranceRow').style.display = insured ? '' : 'none';
+        document.getElementById('taxDisplay').textContent = '$' + tax.toFixed(2);
+        document.getElementById('totalDisplay').textContent = '$' + total.toFixed(2);
+    }
+</script>
+}

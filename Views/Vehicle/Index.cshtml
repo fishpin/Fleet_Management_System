@@ -1,50 +1,115 @@
-﻿@model IEnumerable<Vehicle>
+@model IEnumerable<Vehicle>
 
-<div class="row mb-4">
-    <div class="col-md-8">
-        <h1 class="mb-0">Vehicles</h1>
-    </div>
-    <div class="col-md-4 text-end">
-        <a class="btn btn-success" asp-action="Create">+ Add Vehicle</a>
-    </div>
+<div class="d-flex align-items-center justify-content-between mb-3">
+    <h2 class="page-heading">Fleet</h2>
+    <a class="btn btn-sm btn-primary" asp-action="Create">+ Add Vehicle</a>
 </div>
 
-<div class="table-responsive">
-    <table class="table table-striped table-hover">
-        <thead class="table-primary">
-            <tr>
-                <th>Make</th>
-                <th>Model</th>
-                <th>Year</th>
-                <th>Price/Day</th>
-                <th>Availability</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var vehicle in Model)
+<div class="search-bar-panel">
+    <span class="search-bar-label">Check availability</span>
+    <input type="date" id="filterFrom" class="form-control form-control-sm input-date-filter" onchange="filterVehicles()" />
+    <span class="search-bar-label">to</span>
+    <input type="date" id="filterTo" class="form-control form-control-sm input-date-filter" onchange="filterVehicles()" />
+    <button class="btn-clear" type="button" onclick="clearFilter()" title="Clear dates">
+        <i class="bi bi-x-lg"></i>
+    </button>
+</div>
+
+<div class="vehicle-grid" id="vehicleGrid">
+    @foreach (var vehicle in Model)
+    {
+        <div class="vehicle-card" data-vehicle-id="@vehicle.Id" data-available="@vehicle.IsAvailable.ToString().ToLower()">
+            <div class="vehicle-img-placeholder">🚗</div>
+            @if (vehicle.IsAvailable)
             {
-                <tr>
-                    <td>@vehicle.Make</td>
-                    <td>@vehicle.Model</td>
-                    <td>@vehicle.Year</td>
-                    <td><strong>$@vehicle.PricePerDay.ToString("F2")</strong></td>
-                    <td>
-                        @if (vehicle.IsAvailable)
-                        {
-                            <span class="badge bg-success">Available</span>
-                        }
-                        else
-                        {
-                            <span class="badge bg-danger">Not Available</span>
-                        }
-                    </td>
-                    <td>
-                        <a class="btn btn-sm btn-warning" asp-action="Edit" asp-route-id="@vehicle.Id">Edit</a>
-                        <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@vehicle.Id">Delete</a>
-                    </td>
-                </tr>
+                <span class="vehicle-card-badge">Available</span>
             }
-        </tbody>
-    </table>
+            <div class="vehicle-card-body">
+                <div class="vehicle-card-name">
+                    @vehicle.Make @vehicle.Model
+                    <span class="vehicle-card-year">@vehicle.Year</span>
+                </div>
+                <div class="vehicle-card-price">$@vehicle.PricePerDay.ToString("F2") / Day</div>
+            </div>
+            <div class="vehicle-card-footer">
+                @if (vehicle.IsAvailable)
+                {
+                    <a class="btn btn-sm btn-primary flex-fill" asp-controller="Reservation" asp-action="Create" asp-route-vehicleId="@vehicle.Id">Book</a>
+                }
+                else
+                {
+                    <a class="btn btn-sm btn-primary flex-fill vehicle-btn-book" style="display:none;"
+                       asp-controller="Reservation" asp-action="Create" asp-route-vehicleId="@vehicle.Id">Book</a>
+                    <button class="btn btn-sm btn-secondary flex-fill vehicle-btn-booked" disabled>Booked</button>
+                }
+                <a class="btn-icon btn-icon-edit" asp-action="Edit" asp-route-id="@vehicle.Id" title="Edit">
+                    <i class="bi bi-pencil-fill"></i>
+                </a>
+            </div>
+        </div>
+    }
 </div>
+
+@if (!Model.Any())
+{
+    <div class="empty-state">
+        <div class="empty-icon">🚗</div>
+        <p class="mb-0">No vehicles in the fleet yet. <a asp-action="Create" class="fw-bold text-dark">Add one</a></p>
+    </div>
+}
+
+@section Scripts {
+<script>
+var reservations = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(ViewBag.Reservations));
+
+function filterVehicles() {
+    var from = document.getElementById('filterFrom').value;
+    var to   = document.getElementById('filterTo').value;
+    var cards = document.querySelectorAll('#vehicleGrid .vehicle-card');
+
+    cards.forEach(function (card) {
+        if (!from && !to) {
+            card.style.display = '';
+            return;
+        }
+        var vid = parseInt(card.dataset.vehicleId);
+        var fromDate = from ? new Date(from) : null;
+        var toDate   = to   ? new Date(to)   : null;
+
+        var booked = reservations.some(function (r) {
+            if (r.vehicleId !== vid) return false;
+            var s = new Date(r.start);
+            var e = new Date(r.end);
+            if (fromDate && toDate) return s < toDate && e > fromDate;
+            if (fromDate)           return s <= fromDate && e > fromDate;
+            if (toDate)             return s < toDate;
+            return false;
+        });
+
+        card.style.display = booked ? 'none' : '';
+
+        // Swap button state for currently-booked vehicles
+        var bookBtn   = card.querySelector('.vehicle-btn-book');
+        var bookedBtn = card.querySelector('.vehicle-btn-booked');
+        if (bookBtn && bookedBtn) {
+            bookBtn.style.display   = booked ? 'none' : '';
+            bookedBtn.style.display = booked ? ''     : 'none';
+        }
+    });
+}
+
+function clearFilter() {
+    document.getElementById('filterFrom').value = '';
+    document.getElementById('filterTo').value = '';
+    document.querySelectorAll('#vehicleGrid .vehicle-card').forEach(function (card) {
+        card.style.display = '';
+        var bookBtn   = card.querySelector('.vehicle-btn-book');
+        var bookedBtn = card.querySelector('.vehicle-btn-booked');
+        if (bookBtn && bookedBtn) {
+            bookBtn.style.display   = 'none';
+            bookedBtn.style.display = '';
+        }
+    });
+}
+</script>
+}

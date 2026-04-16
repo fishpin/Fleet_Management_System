@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FleetManagementSystem.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260415000002_AddBillingLineItems")]
+    partial class AddBillingLineItems
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,7 +31,6 @@ namespace FleetManagementSystem.Migrations
                     b.Property<decimal>("ExtraCharges").HasColumnType("decimal(18,2)");
                     b.Property<decimal>("FinalAmount").HasColumnType("decimal(18,2)");
                     b.Property<bool>("IsPaid").HasColumnType("bit");
-                    b.Property<DateTime>("IssuedDate").HasColumnType("datetime2");
                     b.Property<int>("ReservationId").HasColumnType("int");
                     b.Property<decimal>("Tax").HasColumnType("decimal(18,2)");
                     b.HasKey("Id");
@@ -52,10 +54,8 @@ namespace FleetManagementSystem.Migrations
                 {
                     b.Property<int>("Id").ValueGeneratedOnAdd().HasColumnType("int");
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-                    b.Property<string>("Address").HasColumnType("nvarchar(max)");
                     b.Property<string>("Email").IsRequired().HasColumnType("nvarchar(max)");
                     b.Property<string>("FullName").IsRequired().HasColumnType("nvarchar(max)");
-                    b.Property<string>("LicenseNumber").HasColumnType("nvarchar(max)");
                     b.Property<string>("Phone").IsRequired().HasColumnType("nvarchar(max)");
                     b.HasKey("Id");
                     b.ToTable("Customers");

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
+// Handles POST /Logout — signs the user out and redirects to the login page.
 [Authorize]
 [IgnoreAntiforgeryToken(Order = 2)]
 public class LogoutModel : PageModel

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FleetManagementSystem.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260415000001_AddInsuranceToReservation")]
+    partial class AddInsuranceToReservation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,7 +31,6 @@ namespace FleetManagementSystem.Migrations
                     b.Property<decimal>("ExtraCharges").HasColumnType("decimal(18,2)");
                     b.Property<decimal>("FinalAmount").HasColumnType("decimal(18,2)");
                     b.Property<bool>("IsPaid").HasColumnType("bit");
-                    b.Property<DateTime>("IssuedDate").HasColumnType("datetime2");
                     b.Property<int>("ReservationId").HasColumnType("int");
                     b.Property<decimal>("Tax").HasColumnType("decimal(18,2)");
                     b.HasKey("Id");
@@ -36,26 +38,12 @@ namespace FleetManagementSystem.Migrations
                     b.ToTable("Billings");
                 });
 
-            modelBuilder.Entity("BillingLineItem", b =>
-                {
-                    b.Property<int>("Id").ValueGeneratedOnAdd().HasColumnType("int");
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-                    b.Property<decimal>("Amount").HasColumnType("decimal(18,2)");
-                    b.Property<int>("BillingId").HasColumnType("int");
-                    b.Property<string>("Reason").IsRequired().HasColumnType("nvarchar(max)");
-                    b.HasKey("Id");
-                    b.HasIndex("BillingId");
-                    b.ToTable("BillingLineItems");
-                });
-
             modelBuilder.Entity("Customer", b =>
                 {
                     b.Property<int>("Id").ValueGeneratedOnAdd().HasColumnType("int");
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-                    b.Property<string>("Address").HasColumnType("nvarchar(max)");
                     b.Property<string>("Email").IsRequired().HasColumnType("nvarchar(max)");
                     b.Property<string>("FullName").IsRequired().HasColumnType("nvarchar(max)");
-                    b.Property<string>("LicenseNumber").HasColumnType("nvarchar(max)");
                     b.Property<string>("Phone").IsRequired().HasColumnType("nvarchar(max)");
                     b.HasKey("Id");
                     b.ToTable("Customers");
@@ -184,12 +172,6 @@ namespace FleetManagementSystem.Migrations
                     b.Navigation("Reservation");
                 });
 
-            modelBuilder.Entity("BillingLineItem", b =>
-                {
-                    b.HasOne("Billing", "Billing").WithMany("LineItems").HasForeignKey("BillingId").OnDelete(DeleteBehavior.Cascade).IsRequired();
-                    b.Navigation("Billing");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null).WithMany().HasForeignKey("RoleId").OnDelete(DeleteBehavior.Cascade).IsRequired();
@@ -222,11 +204,6 @@ namespace FleetManagementSystem.Migrations
                     b.HasOne("Vehicle", "Vehicle").WithMany().HasForeignKey("VehicleId").OnDelete(DeleteBehavior.Cascade).IsRequired();
                     b.Navigation("Customer");
                     b.Navigation("Vehicle");
-                });
-
-            modelBuilder.Entity("Billing", b =>
-                {
-                    b.Navigation("LineItems");
                 });
 #pragma warning restore 612, 618
         }

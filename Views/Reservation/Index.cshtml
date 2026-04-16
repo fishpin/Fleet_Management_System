@@ -1,43 +1,192 @@
-﻿@model IEnumerable<Reservation>
+@{
+    var active     = (IEnumerable<Reservation>)ViewBag.ActiveReservations;
+    var upcoming   = (IEnumerable<Reservation>)ViewBag.UpcomingReservations;
+    var past       = (IEnumerable<Reservation>)ViewBag.PastReservations;
+    var allCards   = active.Concat(upcoming).Concat(past);
+    var billingMap = (Dictionary<int, int>)ViewBag.BillingMap;
+}
 
-<div class="row mb-4">
-    <div class="col-md-8">
-        <h1 class="mb-0">Reservations</h1>
-    </div>
-    <div class="col-md-4 text-end">
-        <a class="btn btn-success" asp-action="Create">+ Add Reservation</a>
-    </div>
+<div class="d-flex align-items-center justify-content-between mb-3">
+    <h2 class="page-heading">Reservations</h2>
+    <a class="btn btn-sm btn-primary" asp-action="Create">+ Add Reservation</a>
 </div>
 
-<div class="table-responsive">
-    <table class="table table-striped table-hover">
-        <thead class="table-primary">
-            <tr>
-                <th>ID</th>
-                <th>Vehicle</th>
-                <th>Customer</th>
-                <th>Start Date</th>
-                <th>End Date</th>
-                <th>Total Cost</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
+<div class="reservation-search-panel">
+    <label class="search-bar-label" for="reservationSearch">Reservation ID</label>
+    <input type="text" id="reservationSearch" class="form-control form-control-sm"
+           placeholder="Enter ID..." style="max-width:200px;"
+           oninput="filterReservations(this.value)" />
+    <button class="btn btn-primary btn-sm" type="button"
+            onclick="filterReservations(document.getElementById('reservationSearch').value)">Search</button>
+</div>
+
+<div id="reservationList">
+    @if (!allCards.Any())
+    {
+        <div class="empty-state">
+            <div class="empty-icon">📋</div>
+            <p class="mb-1 fw-semibold">No Reservations currently</p>
+            <a asp-action="Create" class="fw-bold text-dark">Book here</a>
+        </div>
+    }
+    else
+    {
+        @* Active *@
+        <div class="res-section-header">
+            <span class="res-section-title">Active</span>
+            <span class="res-section-badge res-badge-active">@active.Count()</span>
+        </div>
+        @if (!active.Any())
+        {
+            <p class="res-section-empty">No active reservations.</p>
+        }
+        else
+        {
+            @foreach (var item in active)
             {
-                <tr>
-                    <td>@item.Id</td>
-                    <td>@item.Vehicle?.Make @item.Vehicle?.Model</td>
-                    <td>@item.Customer?.FullName</td>
-                    <td>@item.StartDate.ToShortDateString()</td>
-                    <td>@item.EndDate.ToShortDateString()</td>
-                    <td><strong>$@item.TotalCost.ToString("F2")</strong></td>
-                    <td>
-                        <a class="btn btn-sm btn-warning" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                        <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                    </td>
-                </tr>
+                <div class="reservation-card" data-id="@item.Id">
+                    <div class="reservation-thumb">🚗</div>
+                    <div class="reservation-info">
+                        <div class="reservation-id-badge">Reservation #@item.Id</div>
+                        <div class="reservation-vehicle-name">@item.Vehicle?.Make @item.Vehicle?.Model</div>
+                        <div class="reservation-detail-row">
+                            Dates: @item.StartDate.ToShortDateString() &rarr; @item.EndDate.ToShortDateString()
+                        </div>
+                        <div class="reservation-detail-row">
+                            Customer: @item.Customer?.FullName
+                            &nbsp;&bull;&nbsp;
+                            <span class="fw-semibold text-success">$@item.TotalCost.ToString("F2") total</span>
+                        </div>
+                    </div>
+                    <div class="reservation-actions">
+                        @if (billingMap.ContainsKey(item.Id))
+                        {
+                            <a class="btn-icon btn-icon-invoice" asp-controller="Billing" asp-action="Edit"
+                               asp-route-id="@billingMap[item.Id]" title="View Invoice">
+                                <i class="bi bi-receipt"></i>
+                            </a>
+                        }
+                        <a class="btn-icon btn-icon-edit" asp-action="Edit" asp-route-id="@item.Id" title="Modify">
+                            <i class="bi bi-pencil-fill"></i>
+                        </a>
+                        <a class="btn-icon btn-icon-delete" asp-action="Delete" asp-route-id="@item.Id" title="Delete">
+                            <i class="bi bi-trash-fill"></i>
+                        </a>
+                    </div>
+                </div>
             }
-        </tbody>
-    </table>
+        }
+
+        @* Upcoming *@
+        <div class="res-section-header">
+            <span class="res-section-title">Upcoming</span>
+            <span class="res-section-badge res-badge-upcoming">@upcoming.Count()</span>
+        </div>
+        @if (!upcoming.Any())
+        {
+            <p class="res-section-empty">No upcoming reservations.</p>
+        }
+        else
+        {
+            @foreach (var item in upcoming)
+            {
+                <div class="reservation-card" data-id="@item.Id">
+                    <div class="reservation-thumb">🚗</div>
+                    <div class="reservation-info">
+                        <div class="reservation-id-badge">Reservation #@item.Id</div>
+                        <div class="reservation-vehicle-name">@item.Vehicle?.Make @item.Vehicle?.Model</div>
+                        <div class="reservation-detail-row">
+                            Dates: @item.StartDate.ToShortDateString() &rarr; @item.EndDate.ToShortDateString()
+                        </div>
+                        <div class="reservation-detail-row">
+                            Customer: @item.Customer?.FullName
+                            &nbsp;&bull;&nbsp;
+                            <span class="fw-semibold link-accent">$@item.TotalCost.ToString("F2") total</span>
+                        </div>
+                    </div>
+                    <div class="reservation-actions">
+                        @if (billingMap.ContainsKey(item.Id))
+                        {
+                            <a class="btn-icon btn-icon-invoice" asp-controller="Billing" asp-action="Edit"
+                               asp-route-id="@billingMap[item.Id]" title="View Invoice">
+                                <i class="bi bi-receipt"></i>
+                            </a>
+                        }
+                        <a class="btn-icon btn-icon-edit" asp-action="Edit" asp-route-id="@item.Id" title="Modify">
+                            <i class="bi bi-pencil-fill"></i>
+                        </a>
+                        <a class="btn-icon btn-icon-delete" asp-action="Delete" asp-route-id="@item.Id" title="Delete">
+                            <i class="bi bi-trash-fill"></i>
+                        </a>
+                    </div>
+                </div>
+            }
+        }
+
+        @* Past *@
+        <div class="res-section-header">
+            <span class="res-section-title">Past</span>
+            <span class="res-section-badge res-badge-past">@past.Count()</span>
+        </div>
+        @if (!past.Any())
+        {
+            <p class="res-section-empty">No past reservations.</p>
+        }
+        else
+        {
+            @foreach (var item in past)
+            {
+                <div class="reservation-card reservation-card-past" data-id="@item.Id">
+                    <div class="reservation-thumb">🚗</div>
+                    <div class="reservation-info">
+                        <div class="reservation-id-badge">Reservation #@item.Id</div>
+                        <div class="reservation-vehicle-name">@item.Vehicle?.Make @item.Vehicle?.Model</div>
+                        <div class="reservation-detail-row">
+                            Dates: @item.StartDate.ToShortDateString() &rarr; @item.EndDate.ToShortDateString()
+                        </div>
+                        <div class="reservation-detail-row">
+                            Customer: @item.Customer?.FullName
+                            &nbsp;&bull;&nbsp;
+                            <span class="fw-semibold">$@item.TotalCost.ToString("F2") total</span>
+                        </div>
+                    </div>
+                    <div class="reservation-actions">
+                        @if (billingMap.ContainsKey(item.Id))
+                        {
+                            <a class="btn-icon btn-icon-invoice" asp-controller="Billing" asp-action="Edit"
+                               asp-route-id="@billingMap[item.Id]" title="View Invoice">
+                                <i class="bi bi-receipt"></i>
+                            </a>
+                        }
+                        <a class="btn-icon btn-icon-edit" asp-action="Edit" asp-route-id="@item.Id" title="Modify">
+                            <i class="bi bi-pencil-fill"></i>
+                        </a>
+                        <a class="btn-icon btn-icon-delete" asp-action="Delete" asp-route-id="@item.Id" title="Delete">
+                            <i class="bi bi-trash-fill"></i>
+                        </a>
+                    </div>
+                </div>
+            }
+        }
+
+        <div class="empty-state d-none" id="noResults">
+            <p class="mb-0">No matching reservations found.</p>
+        </div>
+    }
 </div>
+
+@section Scripts {
+<script>
+function filterReservations(query) {
+    var cards = document.querySelectorAll('#reservationList .reservation-card');
+    var noResults = document.getElementById('noResults');
+    var found = 0;
+    cards.forEach(function (card) {
+        var match = !query || card.dataset.id.includes(query.trim());
+        card.style.display = match ? '' : 'none';
+        if (match) found++;
+    });
+    if (noResults) noResults.classList.toggle('d-none', found > 0 || !query);
+}
+</script>
+}

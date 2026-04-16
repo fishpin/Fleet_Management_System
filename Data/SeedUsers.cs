@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
+// Creates default login accounts on first run if they don't already exist.
 public static class SeedUsers
 {
     public static async Task InitializeUsers(UserManager<IdentityUser> userManager)
     {
         try
         {
+            // Default credentials for demo/testing — change before production use
             var defaultUsers = new[]
             {
                 new { Email = "user@example.com", Password = "Test@123" },

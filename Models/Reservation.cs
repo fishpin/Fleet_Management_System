@@ -16,6 +16,8 @@ public class Reservation
 
     public decimal TotalCost { get; set; }
 
+    public bool IncludesInsurance { get; set; }
+
     // Navigation Properties
     public Vehicle Vehicle { get; set; }
     public Customer Customer { get; set; }

@@ -1,10 +1,57 @@
-﻿@model Vehicle
-<h2>Edit Vehicle</h2>
-<form asp-action="Edit" method="post">
-    <input type="hidden" asp-for="Id" />
-    <input asp-for="Make" />
-    <input asp-for="Model" />
-    <input asp-for="Year" />
-    <input asp-for="PricePerDay" />
-    <button type="submit">Update</button>
-</form>
+@model Vehicle
+
+<a asp-action="Index" class="invoice-back-link">
+    <i class="bi bi-arrow-left"></i> Return to vehicles
+</a>
+
+<div class="book-wrapper">
+    <div class="book-card">
+        <h5 class="book-title">Edit Vehicle</h5>
+
+        <form asp-action="Edit" method="post">
+            <input type="hidden" asp-for="Id" />
+
+            <div class="mb-3">
+                <label class="book-field-label">Make</label>
+                <input asp-for="Make" class="form-control form-control-sm" />
+            </div>
+
+            <div class="mb-3">
+                <label class="book-field-label">Model</label>
+                <input asp-for="Model" class="form-control form-control-sm" />
+            </div>
+
+            <div class="mb-3">
+                <label class="book-field-label">Year</label>
+                <input asp-for="Year" type="number" class="form-control form-control-sm input-year" />
+            </div>
+
+            <div class="mb-3">
+                <label class="book-field-label">Price Per Day</label>
+                <div class="input-group input-group-sm input-price-group">
+                    <span class="input-group-text">$</span>
+                    <input asp-for="PricePerDay" type="number" step="0.01" min="0" class="form-control" />
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="book-field-label d-block">Availability</label>
+                <div class="d-flex align-items-center gap-2 mt-1">
+                    <input asp-for="IsAvailable" class="form-check-input mt-0" type="checkbox" />
+                    <span class="form-hint">Available for rental</span>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center mt-4">
+                <a class="btn-icon btn-icon-delete" asp-action="Delete" asp-route-id="@Model.Id" title="Delete">
+                    <i class="bi bi-trash-fill"></i>
+                </a>
+                <div class="d-flex gap-2">
+                    <a asp-action="Index" class="btn btn-secondary btn-sm">Cancel</a>
+                    <button type="submit" class="btn btn-primary btn-sm px-4">Save</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>

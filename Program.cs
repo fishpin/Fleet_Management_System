@@ -9,7 +9,8 @@ public class Program
 
         // Add DB Context
         builder.Services.AddDbContext<AppDbContext>(options =>
-            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
+                sqlOptions => sqlOptions.EnableRetryOnFailure()));
 
         // Identity configuration - without UI
         builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
@@ -40,26 +41,30 @@ public class Program
 
         var app = builder.Build();
 
-        // Seed the database
-        try
+        // Migrate and seed the database
+        using (var scope = app.Services.CreateScope())
         {
-            using (var scope = app.Services.CreateScope())
+            var services = scope.ServiceProvider;
+            var context = services.GetRequiredService<AppDbContext>();
+            var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
+            context.Database.Migrate();
+            try
             {
-                var services = scope.ServiceProvider;
-                var context = services.GetRequiredService<AppDbContext>();
-                var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
-                context.Database.Migrate();
                 SeedData.Initialize(context);
                 SeedUsers.InitializeUsers(userManager).Wait();
             }
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"An error occurred during database seeding: {ex.Message}");
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred during database seeding: {ex.Message}");
+            }
         }
 
         // Configure the HTTP request pipeline
-        if (!app.Environment.IsDevelopment())
+        if (app.Environment.IsDevelopment())
+        {
+            app.UseDeveloperExceptionPage();
+        }
+        else
         {
             app.UseExceptionHandler("/Home/Error");
             app.UseHsts();

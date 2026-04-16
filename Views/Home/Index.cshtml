@@ -1,9 +1,148 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+@{
+    ViewData["Title"] = "Dashboard";
+    var pickups = (IEnumerable<Reservation>)ViewBag.PickupsToday;
+    var returns = (IEnumerable<Reservation>)ViewBag.ReturnsToday;
+    var recent  = (IEnumerable<Reservation>)ViewBag.RecentReservations;
 }
-<h2>Dashboard</h2>
-<div>
-    <p>Total Vehicles: @ViewBag.Vehicles</p>
-    <p>Total Customers: @ViewBag.Customers</p>
-    <p>Total Reservations: @ViewBag.Reservations</p>
+
+@section FullWidth {
+    @if ((bool)ViewBag.LowAvailability)
+    {
+        <div class="alert dashboard-alert alert-dismissible fade show mb-0" role="alert">
+            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+            Only <strong>@ViewBag.AvailableVehicles</strong> vehicle@((int)ViewBag.AvailableVehicles == 1 ? "" : "s") available — fleet is nearly fully booked.
+            <a asp-controller="Vehicle" asp-action="Index" class="alert-link ms-1">Manage Fleet</a>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <div class="hero-section">
+        <div>
+            <span class="hero-car">🚗</span>
+            <div class="hero-tagline">We go ZOOM ZOOM</div>
+            <div class="hero-sub">Your complete fleet management solution</div>
+        </div>
+    </div>
+}
+
+@* Stat cards *@
+<div class="dash-stats">
+    <div class="dash-stat-card">
+        <div class="dash-stat-icon"><i class="bi bi-car-front-fill"></i></div>
+        <div class="dash-stat-body">
+            <div class="dash-stat-number">@ViewBag.AvailableVehicles <span class="dash-stat-denom">/ @ViewBag.TotalVehicles</span></div>
+            <div class="dash-stat-label">Vehicles Available</div>
+        </div>
+    </div>
+    <div class="dash-stat-card">
+        <div class="dash-stat-icon"><i class="bi bi-calendar-check-fill"></i></div>
+        <div class="dash-stat-body">
+            <div class="dash-stat-number">@ViewBag.TotalReservations</div>
+            <div class="dash-stat-label">Reservations</div>
+        </div>
+    </div>
+    <div class="dash-stat-card">
+        <div class="dash-stat-icon"><i class="bi bi-people-fill"></i></div>
+        <div class="dash-stat-body">
+            <div class="dash-stat-number">@ViewBag.TotalCustomers</div>
+            <div class="dash-stat-label">Customers</div>
+        </div>
+    </div>
+    <div class="dash-stat-card">
+        <div class="dash-stat-icon"><i class="bi bi-cash-stack"></i></div>
+        <div class="dash-stat-body">
+            <div class="dash-stat-number dash-stat-accent">$@(((decimal)ViewBag.MonthlyRevenue).ToString("N0"))</div>
+            <div class="dash-stat-label">Revenue This Month</div>
+        </div>
+    </div>
+</div>
+
+@* Today's activity *@
+<div class="dash-today">
+    <div class="dash-today-panel">
+        <div class="dash-panel-header">
+            <span class="dash-panel-title">Pickups Today</span>
+            <span class="dash-panel-badge">@pickups.Count()</span>
+        </div>
+        @if (!pickups.Any())
+        {
+            <p class="dash-panel-empty">No pickups scheduled.</p>
+        }
+        else
+        {
+            @foreach (var r in pickups)
+            {
+                <div class="dash-today-row">
+                    <div class="dash-today-name">@r.Customer?.FullName</div>
+                    <div class="dash-today-vehicle">@r.Vehicle?.Make @r.Vehicle?.Model</div>
+                </div>
+            }
+        }
+    </div>
+
+    <div class="dash-today-panel">
+        <div class="dash-panel-header">
+            <span class="dash-panel-title">Returns Today</span>
+            <span class="dash-panel-badge">@returns.Count()</span>
+        </div>
+        @if (!returns.Any())
+        {
+            <p class="dash-panel-empty">No returns scheduled.</p>
+        }
+        else
+        {
+            @foreach (var r in returns)
+            {
+                <div class="dash-today-row">
+                    <div class="dash-today-name">@r.Customer?.FullName</div>
+                    <div class="dash-today-vehicle">@r.Vehicle?.Make @r.Vehicle?.Model</div>
+                </div>
+            }
+        }
+    </div>
+</div>
+
+@* Recent reservations *@
+<div class="dash-recent">
+    <div class="dash-panel-header mb-2">
+        <span class="dash-panel-title">Recent Reservations</span>
+        <a asp-controller="Reservation" asp-action="Index" class="dash-see-all">See all</a>
+    </div>
+    @if (!recent.Any())
+    {
+        <p class="dash-panel-empty">No reservations yet.</p>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="dash-table">
+                <thead>
+                    <tr>
+                        <th>Customer</th>
+                        <th>Vehicle</th>
+                        <th>Dates</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var r in recent)
+                    {
+                        <tr>
+                            <td>@r.Customer?.FullName</td>
+                            <td>@r.Vehicle?.Make @r.Vehicle?.Model</td>
+                            <td class="dash-table-dates">@r.StartDate.ToString("MMM d") &rarr; @r.EndDate.ToString("MMM d, yyyy")</td>
+                            <td class="dash-table-cost">$@r.TotalCost.ToString("F2")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>
+
+@* Quick actions *@
+<div class="dash-actions">
+    <a class="btn btn-primary btn-sm" asp-controller="Reservation" asp-action="Create">+ New Reservation</a>
+    <a class="btn btn-secondary btn-sm" asp-controller="Vehicle" asp-action="Create">+ Add Vehicle</a>
+    <a class="btn btn-secondary btn-sm" asp-controller="Customer" asp-action="Create">+ Add Customer</a>
 </div>

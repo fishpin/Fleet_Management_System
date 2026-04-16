@@ -2,7 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
+// Handles CRUD operations for vehicles and the reports view.
 [Authorize]
+[AutoValidateAntiforgeryToken]
 public class VehicleController : Controller
 {
     private readonly AppDbContext _context;
@@ -12,7 +14,17 @@ public class VehicleController : Controller
         _context = context; 
     }
 
-    public async Task<IActionResult> Index() => View(await _context.Vehicles.ToListAsync());
+    public async Task<IActionResult> Index()
+    {
+        ViewBag.Reservations = await _context.Reservations
+            .Select(r => new {
+                vehicleId = r.VehicleId,
+                start = r.StartDate.ToString("yyyy-MM-dd"),
+                end = r.EndDate.ToString("yyyy-MM-dd")
+            })
+            .ToListAsync();
+        return View(await _context.Vehicles.ToListAsync());
+    }
 
     public IActionResult Create() => View();
 
@@ -31,22 +43,46 @@ public class VehicleController : Controller
     public async Task<IActionResult> Edit(int id)
     {
         var v = await _context.Vehicles.FindAsync(id);
+        if (v == null) return NotFound();
         return View(v);
     }
 
     [HttpPost]
     public async Task<IActionResult> Edit(Vehicle v)
     {
-        _context.Update(v);
-        await _context.SaveChangesAsync();
-        return RedirectToAction(nameof(Index));
+        if (ModelState.IsValid)
+        {
+            _context.Update(v);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+        return View(v);
     }
 
     public async Task<IActionResult> Delete(int id)
     {
         var v = await _context.Vehicles.FindAsync(id);
-        _context.Vehicles.Remove(v);
-        await _context.SaveChangesAsync();
+        if (v == null) return NotFound();
+        return View(v);
+    }
+
+    [HttpPost, ActionName("Delete")]
+    public async Task<IActionResult> DeleteConfirmed(int id)
+    {
+        // Block deletion if the vehicle has existing reservations to prevent orphaned records.
+        var hasReservations = await _context.Reservations.AnyAsync(r => r.VehicleId == id);
+        if (hasReservations)
+        {
+            TempData["DeleteError"] = "This vehicle has existing reservations and cannot be deleted.";
+            return RedirectToAction(nameof(Delete), new { id });
+        }
+
+        var v = await _context.Vehicles.FindAsync(id);
+        if (v != null)
+        {
+            _context.Vehicles.Remove(v);
+            await _context.SaveChangesAsync();
+        }
         return RedirectToAction(nameof(Index));
     }
 

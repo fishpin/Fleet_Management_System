@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
+// Login page — redirects already-authenticated users straight to the dashboard.
 [AllowAnonymous]
 [IgnoreAntiforgeryToken]
 public class IndexModel : PageModel
@@ -26,7 +27,7 @@ public class IndexModel : PageModel
     {
         if (_signInManager.IsSignedIn(User))
         {
-            Response.Redirect("/Vehicle/Index");
+            Response.Redirect("/Home/Index");
             return;
         }
     }
@@ -56,7 +57,7 @@ public class IndexModel : PageModel
 
         if (result.Succeeded)
         {
-            return Redirect("/Vehicle/Index");
+            return Redirect("/Home/Index");
         }
 
         ModelState.Clear();

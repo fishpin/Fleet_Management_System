@@ -1,8 +1,45 @@
-﻿@model Customer
-<h2>Create Customer</h2>
-<form asp-action="Create" method="post">
-    <input asp-for="FullName" placeholder="Full Name" />
-    <input asp-for="Email" placeholder="Email" />
-    <input asp-for="Phone" placeholder="Phone" />
-    <button type="submit">Save</button>
-</form>
+@model Customer
+
+<a asp-action="Index" class="invoice-back-link">
+    <i class="bi bi-arrow-left"></i> Return to customers
+</a>
+
+<div class="book-wrapper">
+    <div class="book-card">
+        <h5 class="book-title">Add Customer</h5>
+
+        <form asp-action="Create" method="post">
+
+            <div class="mb-3">
+                <label class="book-field-label">Full Name</label>
+                <input asp-for="FullName" class="form-control form-control-sm" placeholder="Jane Smith" />
+            </div>
+
+            <div class="mb-3">
+                <label class="book-field-label">Email</label>
+                <input asp-for="Email" type="email" class="form-control form-control-sm" placeholder="jane@example.com" />
+            </div>
+
+            <div class="mb-3">
+                <label class="book-field-label">Phone</label>
+                <input asp-for="Phone" type="tel" class="form-control form-control-sm" placeholder="555-123-4567" />
+            </div>
+
+            <div class="mb-3">
+                <label class="book-field-label">Address</label>
+                <input asp-for="Address" class="form-control form-control-sm" placeholder="123 Main St, City, State" />
+            </div>
+
+            <div class="mb-3">
+                <label class="book-field-label">Driver's License #</label>
+                <input asp-for="LicenseNumber" class="form-control form-control-sm" placeholder="DL-000000" />
+            </div>
+
+            <div class="d-flex justify-content-end gap-2 mt-4">
+                <a asp-action="Index" class="btn btn-secondary btn-sm">Cancel</a>
+                <button type="submit" class="btn btn-primary btn-sm px-4">Save</button>
+            </div>
+
+        </form>
+    </div>
+</div>

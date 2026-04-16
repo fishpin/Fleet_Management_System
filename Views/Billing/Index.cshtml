@@ -1,39 +1,51 @@
-﻿@model IEnumerable<Billing>
+@model IEnumerable<Billing>
 
-<div class="row mb-4">
-    <div class="col-md-8">
-        <h1 class="mb-0">Billing</h1>
-    </div>
-    <div class="col-md-4 text-end">
-        <a class="btn btn-success" asp-action="Create">+ Add Invoice</a>
-    </div>
+<div class="d-flex align-items-center justify-content-between mb-3">
+    <h2 class="page-heading">Billing</h2>
+    <a class="btn btn-sm btn-primary" asp-action="Create">+ Add Invoice</a>
 </div>
 
-<div class="table-responsive">
-    <table class="table table-striped table-hover">
-        <thead class="table-primary">
-            <tr>
-                <th>Reservation ID</th>
-                <th>Tax (12.5%)</th>
-                <th>Extra Charges</th>
-                <th>Final Amount</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>@item.ReservationId</td>
-                    <td>$@item.Tax.ToString("F2")</td>
-                    <td>$@item.ExtraCharges.ToString("F2")</td>
-                    <td><strong class="text-success">$@item.FinalAmount.ToString("F2")</strong></td>
-                    <td>
-                        <a class="btn btn-sm btn-warning" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                        <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-</div>
+@if (!Model.Any())
+{
+    <div class="empty-state">
+        <div class="empty-icon">🧾</div>
+        <p class="mb-0">No invoices yet. <a asp-action="Create" class="fw-bold text-dark">Add one</a></p>
+    </div>
+}
+else
+{
+    <div class="app-card">
+        <div class="table-responsive">
+            <table class="app-table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Reservation</th>
+                        <th>Customer</th>
+                        <th>Tax (12.5%)</th>
+                        <th>Extra Charges</th>
+                        <th>Final Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr class="billing-row" onclick="window.location='@Url.Action("Edit", new { id = item.Id })'">
+                            <td class="billing-status-col">
+                                @if (!item.IsPaid)
+                                {
+                                    <span class="billing-status-dot" title="Outstanding"></span>
+                                }
+                            </td>
+                            <td class="app-table-id">#@item.ReservationId</td>
+                            <td>@item.Reservation?.Customer?.FullName</td>
+                            <td>$@item.Tax.ToString("F2")</td>
+                            <td>$@item.ExtraCharges.ToString("F2")</td>
+                            <td class="app-table-cost">$@item.FinalAmount.ToString("F2")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}

@@ -1,0 +1,188 @@
+@model IEnumerable<Reservation>
+
+<div class="d-flex align-items-center justify-content-between mb-3">
+    <h2 class="page-heading">Reports</h2>
+</div>
+
+<div class="reports-layout">
+
+    @* ── Left: config panel ── *@
+    <div class="reports-card">
+
+        <p class="report-section-label">Report type</p>
+        <div class="report-type-selector">
+            <button type="button" class="report-type-btn active" data-type="dates" onclick="switchType('dates')">
+                <i class="bi bi-calendar-range"></i>
+                <span class="report-type-name">Date Range</span>
+            </button>
+            <button type="button" class="report-type-btn" data-type="vehicle" onclick="switchType('vehicle')">
+                <i class="bi bi-car-front-fill"></i>
+                <span class="report-type-name">By Vehicle</span>
+            </button>
+            <button type="button" class="report-type-btn" data-type="customer" onclick="switchType('customer')">
+                <i class="bi bi-person-fill"></i>
+                <span class="report-type-name">By Customer</span>
+            </button>
+        </div>
+
+        <hr class="report-divider" />
+
+        <div id="inputs-dates" class="report-inputs-panel">
+            <p class="report-hint">Show all reservations whose start date falls within the selected range. Leave either end blank to filter from or up to a single date.</p>
+            <div class="report-inline-inputs">
+                <div class="report-field">
+                    <label class="report-field-label" for="rptFrom">From</label>
+                    <input type="date" id="rptFrom" class="form-control form-control-sm" />
+                </div>
+                <div class="report-field">
+                    <label class="report-field-label" for="rptTo">To</label>
+                    <input type="date" id="rptTo" class="form-control form-control-sm" />
+                </div>
+            </div>
+        </div>
+
+        <div id="inputs-vehicle" class="report-inputs-panel d-none">
+            <p class="report-hint">Show all reservations for vehicles matching the entered make or model. Partial matches work — "toy" will match Toyota.</p>
+            <div class="report-inline-inputs">
+                <div class="report-field" style="width:100%;">
+                    <label class="report-field-label" for="rptVehicle">Make / Model</label>
+                    <input type="text" id="rptVehicle" class="form-control form-control-sm" placeholder="e.g. Toyota, Civic…" />
+                </div>
+            </div>
+        </div>
+
+        <div id="inputs-customer" class="report-inputs-panel d-none">
+            <p class="report-hint">Show all reservations linked to a customer whose name contains the search term. Partial matches work.</p>
+            <div class="report-inline-inputs">
+                <div class="report-field" style="width:100%;">
+                    <label class="report-field-label" for="rptCustomer">Customer name</label>
+                    <input type="text" id="rptCustomer" class="form-control form-control-sm" placeholder="e.g. John Smith…" />
+                </div>
+            </div>
+        </div>
+
+        <div class="report-actions">
+            <button type="button" class="btn btn-dark btn-sm report-generate-btn" onclick="generateReport()">Generate Report</button>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="resetReport()">Reset</button>
+        </div>
+    </div>
+
+    @* ── Right: results panel ── *@
+    <div class="report-results-panel">
+        <div id="reportEmpty" class="report-empty-state">
+            <i class="bi bi-bar-chart-line report-empty-icon"></i>
+            <p class="report-empty-title">No report generated yet</p>
+            <p class="report-empty-sub">Choose a report type, set your filters, and click <strong>Generate Report</strong>.</p>
+        </div>
+
+        <div id="reportResults" class="d-none">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+                <p class="report-section-label mb-0">Results</p>
+                <span id="reportSummary" class="report-summary"></span>
+            </div>
+            <div class="app-card">
+                <div class="table-responsive">
+                    <table class="app-table">
+                        <thead>
+                            <tr>
+                                <th>Reservation</th>
+                                <th>Vehicle</th>
+                                <th>Customer</th>
+                                <th>Start</th>
+                                <th>End</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody id="reportTableBody">
+                            @foreach (var item in Model)
+                            {
+                                <tr data-start="@item.StartDate.ToString("yyyy-MM-dd")"
+                                    data-end="@item.EndDate.ToString("yyyy-MM-dd")"
+                                    data-vehicle="@((item.Vehicle?.Make + " " + item.Vehicle?.Model).ToLower())"
+                                    data-customer="@item.Customer?.FullName.ToLower()"
+                                    data-cost="@item.TotalCost">
+                                    <td class="app-table-id">#@item.Id</td>
+                                    <td>@item.Vehicle?.Make @item.Vehicle?.Model</td>
+                                    <td>@item.Customer?.FullName</td>
+                                    <td>@item.StartDate.ToString("MMM d, yyyy")</td>
+                                    <td>@item.EndDate.ToString("MMM d, yyyy")</td>
+                                    <td class="app-table-cost">$@item.TotalCost.ToString("F2")</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <p id="noReportResults" class="text-muted text-center mt-3 d-none text-muted-sm">No results match the selected criteria.</p>
+            <div id="reportTotal" class="report-total-row d-none">
+                <span>Total revenue</span>
+                <span id="reportTotalAmount" class="report-total-amount"></span>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+<script>
+var currentType = 'dates';
+
+function switchType(type) {
+    currentType = type;
+    document.querySelectorAll('.report-type-btn').forEach(function(btn) {
+        btn.classList.toggle('active', btn.dataset.type === type);
+    });
+    document.querySelectorAll('.report-inputs-panel').forEach(function(p) {
+        p.classList.add('d-none');
+    });
+    document.getElementById('inputs-' + type).classList.remove('d-none');
+    resetReport();
+}
+
+function generateReport() {
+    var rows    = document.querySelectorAll('#reportTableBody tr');
+    var from    = document.getElementById('rptFrom').value;
+    var to      = document.getElementById('rptTo').value;
+    var vehicle = document.getElementById('rptVehicle').value.toLowerCase().trim();
+    var customer= document.getElementById('rptCustomer').value.toLowerCase().trim();
+    var shown   = 0;
+    var total   = 0;
+
+    rows.forEach(function(row) {
+        var show = true;
+        if (currentType === 'dates') {
+            if (from && row.dataset.start < from) show = false;
+            if (to   && row.dataset.start > to)   show = false;
+        } else if (currentType === 'vehicle' && vehicle) {
+            show = row.dataset.vehicle.includes(vehicle);
+        } else if (currentType === 'customer' && customer) {
+            show = row.dataset.customer.includes(customer);
+        }
+        row.style.display = show ? '' : 'none';
+        if (show) { shown++; total += parseFloat(row.dataset.cost) || 0; }
+    });
+
+    document.getElementById('reportEmpty').classList.add('d-none');
+    document.getElementById('reportResults').classList.remove('d-none');
+    document.getElementById('noReportResults').classList.toggle('d-none', shown > 0);
+    document.getElementById('reportSummary').textContent = shown + ' reservation' + (shown !== 1 ? 's' : '') + ' found';
+
+    var totalEl = document.getElementById('reportTotal');
+    if (shown > 0) {
+        totalEl.classList.remove('d-none');
+        document.getElementById('reportTotalAmount').textContent = '$' + total.toFixed(2);
+    } else {
+        totalEl.classList.add('d-none');
+    }
+}
+
+function resetReport() {
+    document.getElementById('rptFrom').value     = '';
+    document.getElementById('rptTo').value       = '';
+    document.getElementById('rptVehicle').value  = '';
+    document.getElementById('rptCustomer').value = '';
+    document.getElementById('reportEmpty').classList.remove('d-none');
+    document.getElementById('reportResults').classList.add('d-none');
+}
+</script>
+}

@@ -2,7 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
+// Handles CRUD operations for customers.
 [Authorize]
+[AutoValidateAntiforgeryToken]
 public class CustomerController : Controller
 {
     private readonly AppDbContext _context;
@@ -58,6 +60,14 @@ public class CustomerController : Controller
     [HttpPost, ActionName("Delete")]
     public async Task<IActionResult> DeleteConfirmed(int id)
     {
+        // Block deletion if the customer has existing reservations to prevent orphaned records.
+        var hasReservations = await _context.Reservations.AnyAsync(r => r.CustomerId == id);
+        if (hasReservations)
+        {
+            TempData["DeleteError"] = "This customer has existing reservations and cannot be deleted.";
+            return RedirectToAction(nameof(Delete), new { id });
+        }
+
         var c = await _context.Customers.FindAsync(id);
         if (c != null)
         {

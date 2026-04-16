@@ -1,7 +1,44 @@
-﻿@model Vehicle
-<h2>Delete Vehicle</h2>
-<form asp-action="Delete" method="post">
-    <input type="hidden" asp-for="Id" />
-    <p>Are you sure you want to delete @Model.Make @Model.Model?</p>
-    <button type="submit">Delete</button>
-</form>
+@model Vehicle
+
+<a asp-action="Index" class="invoice-back-link">
+    <i class="bi bi-arrow-left"></i> Return to vehicles
+</a>
+
+<div class="book-wrapper">
+    <div class="book-card">
+        <h5 class="book-title">Delete Vehicle</h5>
+
+        <div class="book-pricing mb-4">
+            <div class="pricing-row">
+                <span>Vehicle</span>
+                <span class="pricing-value">@Model.Year @Model.Make @Model.Model</span>
+            </div>
+            <div class="pricing-row">
+                <span>Price Per Day</span>
+                <span class="pricing-value">$@Model.PricePerDay.ToString("F2")</span>
+            </div>
+            <div class="pricing-row">
+                <span>Status</span>
+                <span class="pricing-value">@(Model.IsAvailable ? "Available" : "Booked")</span>
+            </div>
+        </div>
+
+        @if (TempData["DeleteError"] != null)
+        {
+            <div class="alert dashboard-alert mb-3" role="alert">
+                <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                @TempData["DeleteError"]
+            </div>
+        }
+
+        <p class="text-muted-sm">This action cannot be undone.</p>
+
+        <form asp-action="Delete" method="post">
+            <input type="hidden" asp-for="Id" />
+            <div class="d-flex justify-content-end gap-2">
+                <a asp-action="Index" class="btn btn-secondary btn-sm">Cancel</a>
+                <button type="submit" class="btn btn-danger btn-sm">Delete Vehicle</button>
+            </div>
+        </form>
+    </div>
+</div>

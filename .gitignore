@@ -1,0 +1,13 @@
+## Visual Studio files
+.vs/
+*.user
+
+## Build output
+bin/
+obj/
+
+## ASP.NET
+wwwroot/lib/
+
+## User secrets
+appsettings.Development.json

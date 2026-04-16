@@ -1,35 +1,239 @@
 @model Billing
 
-<h2>Edit Invoice</h2>
+@{
+    var r = Model.Reservation;
+    var days = r != null ? (r.EndDate - r.StartDate).Days : 0;
+    var isPaid = Model.IsPaid;
+    var insuranceCost = (r?.IncludesInsurance == true) ? days * 25m : 0m;
+    var rentalCost = (r?.TotalCost ?? 0m) - insuranceCost;
+    var subtotal = Model.FinalAmount - Model.Tax;
+}
 
-<form asp-action="Edit" method="post">
-    <div class="form-group">
-        <label asp-for="Id" class="control-label"></label>
-        <input asp-for="Id" class="form-control" readonly />
-    </div>
+<a asp-action="Index" class="invoice-back-link">
+    <i class="bi bi-arrow-left"></i> Return to invoices
+</a>
 
-    <div class="form-group">
-        <label asp-for="ReservationId" class="control-label"></label>
-        <input asp-for="ReservationId" class="form-control" />
-    </div>
+<div class="invoice-wrapper">
+    <div class="invoice-card">
 
-    <div class="form-group">
-        <label asp-for="Tax" class="control-label"></label>
-        <input asp-for="Tax" class="form-control" />
-    </div>
+        @* Header *@
+        <div class="invoice-header">
+            <div>
+                <div class="invoice-number">INV-@Model.Id.ToString("D4")</div>
+                <div class="invoice-issued">Issued @Model.IssuedDate.ToString("MMMM d, yyyy")</div>
+            </div>
+            <div class="dropdown">
+                <button type="button" id="statusDropdownBtn"
+                        class="invoice-status @(isPaid ? "invoice-status-paid" : "invoice-status-outstanding")"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                    @(isPaid ? "Paid" : "Outstanding") <i class="bi bi-chevron-down invoice-status-chevron"></i>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li><button class="dropdown-item" type="button" onclick="setStatus(false)">Outstanding</button></li>
+                    <li><button class="dropdown-item" type="button" onclick="setStatus(true)">Paid</button></li>
+                </ul>
+            </div>
+        </div>
 
-    <div class="form-group">
-        <label asp-for="ExtraCharges" class="control-label"></label>
-        <input asp-for="ExtraCharges" class="form-control" />
-    </div>
+        <hr class="invoice-divider" />
 
-    <div class="form-group">
-        <label asp-for="FinalAmount" class="control-label"></label>
-        <input asp-for="FinalAmount" class="form-control" readonly />
-    </div>
+        @* Info Grid *@
+        <div class="invoice-info-grid">
+            <div class="invoice-info-block">
+                <div class="invoice-section-label">Bill To</div>
+                <div class="invoice-info-value">@r?.Customer?.FullName</div>
+                @if (!string.IsNullOrEmpty(r?.Customer?.Email))
+                {
+                    <div class="invoice-info-sub">@r.Customer.Email</div>
+                }
+                @if (!string.IsNullOrEmpty(r?.Customer?.Phone))
+                {
+                    <div class="invoice-info-sub">@r.Customer.Phone</div>
+                }
+            </div>
+            <div class="invoice-info-block">
+                <div class="invoice-section-label">Vehicle</div>
+                <div class="invoice-info-value">@r?.Vehicle?.Year @r?.Vehicle?.Make @r?.Vehicle?.Model</div>
+            </div>
+            <div class="invoice-info-block">
+                <div class="invoice-section-label">Rental Period</div>
+                <div class="invoice-info-value">@r?.StartDate.ToString("MMM d, yyyy") &ndash; @r?.EndDate.ToString("MMM d, yyyy")</div>
+            </div>
+            <div class="invoice-info-block">
+                <div class="invoice-section-label">Reservation</div>
+                <div class="invoice-info-value">RES-@Model.ReservationId.ToString("D4")</div>
+            </div>
+        </div>
 
-    <div class="form-group mt-3">
-        <button type="submit" class="btn btn-primary">Save</button>
-        <a class="btn btn-secondary" asp-action="Index">Cancel</a>
+        <hr class="invoice-divider" />
+
+        @* Line Items Table *@
+        <table class="invoice-table">
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th class="text-end">Amount</th>
+                    <th style="width:32px;"></th>
+                </tr>
+            </thead>
+            <tbody id="lineItemsBody">
+                <tr>
+                    <td>Vehicle rental &mdash; @days day@(days == 1 ? "" : "s") @@ $@(r?.Vehicle?.PricePerDay.ToString("F2") ?? "0.00")/day</td>
+                    <td class="text-end">$@rentalCost.ToString("F2")</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Insurance coverage @@ $25.00/day</td>
+                    <td class="text-end">$@insuranceCost.ToString("F2")</td>
+                    <td></td>
+                </tr>
+                @foreach (var item in Model.LineItems)
+                {
+                    <tr id="line-@item.Id">
+                        <td>@item.Reason</td>
+                        <td class="text-end">$@item.Amount.ToString("F2")</td>
+                        <td>
+                            <button type="button" class="invoice-remove-btn" onclick="removeLine(@item.Id)" title="Remove">
+                                <i class="bi bi-x"></i>
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr class="invoice-subtotal-row">
+                    <td>Subtotal</td>
+                    <td class="text-end" id="subtotalDisplay">$@subtotal.ToString("F2")</td>
+                    <td></td>
+                </tr>
+                <tr class="invoice-tax-row">
+                    <td>Tax (12.5%)</td>
+                    <td class="text-end">$@Model.Tax.ToString("F2")</td>
+                    <td></td>
+                </tr>
+                <tr class="invoice-total-row">
+                    <td>Amount Due</td>
+                    <td class="text-end" id="totalDisplay">$@Model.FinalAmount.ToString("F2")</td>
+                    <td></td>
+                </tr>
+            </tfoot>
+        </table>
+
+        @* Add Charge *@
+        <div class="invoice-add-section">
+            <div class="invoice-section-label mb-2">Add Charge</div>
+            <div class="invoice-add-charge">
+                <select id="chargeReason" class="form-select form-select-sm invoice-reason-select">
+                    <option value="">Select charge type...</option>
+                    <option>Fuel surcharge</option>
+                    <option>Cleaning fee</option>
+                    <option>Late return fee</option>
+                    <option>Damage</option>
+                    <option>Toll charges</option>
+                    <option>Other</option>
+                </select>
+                <input type="number" id="chargeAmount" step="0.01" min="0.01" placeholder="0.00"
+                       class="form-control form-control-sm text-end invoice-charge-amount" />
+                <button type="button" class="invoice-add-btn btn btn-primary" onclick="addLine()" title="Add">
+                    <i class="bi bi-plus"></i>
+                </button>
+            </div>
+            <div id="addChargeError" class="invoice-add-error" style="display:none;"></div>
+        </div>
+
     </div>
-</form>
+</div>
+
+@Html.AntiForgeryToken()
+
+@section Scripts {
+<script>
+var billingId = @Model.Id;
+var isPaid = @(Model.IsPaid ? "true" : "false");
+var token = document.querySelector('input[name="__RequestVerificationToken"]').value;
+
+function setStatus(wantPaid) {
+    if (wantPaid === isPaid) return;
+    fetch('/Billing/SetPaid', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'RequestVerificationToken': token
+        },
+        body: 'id=' + billingId + '&paid=' + wantPaid
+    })
+    .then(r => r.json())
+    .then(function(data) {
+        isPaid = data.isPaid;
+        var btn = document.getElementById('statusDropdownBtn');
+        var label = isPaid ? 'Paid' : 'Outstanding';
+        var cls = isPaid ? 'invoice-status-paid' : 'invoice-status-outstanding';
+        btn.innerHTML = label + ' <i class="bi bi-chevron-down invoice-status-chevron"></i>';
+        btn.className = 'invoice-status ' + cls;
+    });
+}
+
+function addLine() {
+    var reason = document.getElementById('chargeReason').value;
+    var amount = parseFloat(document.getElementById('chargeAmount').value);
+    var errEl = document.getElementById('addChargeError');
+
+    if (!reason) { showError('Please select a charge type.'); return; }
+    if (!amount || amount <= 0) { showError('Please enter a valid amount.'); return; }
+    errEl.style.display = 'none';
+
+    fetch('/Billing/AddLineItem', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'RequestVerificationToken': token
+        },
+        body: 'billingId=' + billingId + '&reason=' + encodeURIComponent(reason) + '&amount=' + amount
+    })
+    .then(r => r.json())
+    .then(function(data) {
+        var tbody = document.getElementById('lineItemsBody');
+        var row = document.createElement('tr');
+        row.id = 'line-' + data.itemId;
+        row.innerHTML =
+            '<td>' + escHtml(data.reason) + '</td>' +
+            '<td class="text-end">$' + data.amountFormatted + '</td>' +
+            '<td><button type="button" class="invoice-remove-btn" onclick="removeLine(' + data.itemId + ')" title="Remove"><i class="bi bi-x"></i></button></td>';
+        tbody.appendChild(row);
+        document.getElementById('subtotalDisplay').textContent = '$' + data.subtotal;
+        document.getElementById('totalDisplay').textContent = '$' + data.finalAmount;
+        document.getElementById('chargeReason').value = '';
+        document.getElementById('chargeAmount').value = '';
+    })
+    .catch(function() { showError('Failed to add charge. Please try again.'); });
+}
+
+function removeLine(id) {
+    fetch('/Billing/RemoveLineItem', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'RequestVerificationToken': token
+        },
+        body: 'id=' + id
+    })
+    .then(r => r.json())
+    .then(function(data) {
+        var row = document.getElementById('line-' + id);
+        if (row) row.remove();
+        document.getElementById('subtotalDisplay').textContent = '$' + data.subtotal;
+        document.getElementById('totalDisplay').textContent = '$' + data.finalAmount;
+    });
+}
+
+function showError(msg) {
+    var el = document.getElementById('addChargeError');
+    el.textContent = msg;
+    el.style.display = 'block';
+}
+
+function escHtml(str) {
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+</script>
+}

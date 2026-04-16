@@ -1,7 +1,7 @@
-﻿@page
+@page
 @model RegisterModel
 @{
-    ViewData["Title"] = "Register";
+    Layout = null;
 }
 
 <!DOCTYPE html>
@@ -9,56 +9,55 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Fleet Management</title>
+    <title>Fleet Management — Create Account</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
 <body>
-    <div class="container">
-        <div class="row justify-content-center mt-5">
-            <div class="col-md-6">
-                <div class="card shadow-lg">
-                    <div class="card-body p-5">
-                        <h1 class="card-title text-center mb-4">🚗 Create Account</h1>
+    <a class="login-logo-bar">🚗 Fleet Management</a>
 
-                        @if (!string.IsNullOrEmpty(Model.Message))
-                        {
-                            <div class="alert alert-@Model.MessageType" role="alert">
-                                @Model.Message
-                            </div>
-                        }
+    <div class="login-wrapper">
+        <div class="login-card">
+            <h5 class="login-title">Sign Up</h5>
+            <p class="login-subtitle">Fill in your details to get started</p>
 
-                        <form method="post">
-                            <div class="mb-3">
-                                <label for="email" class="form-label">Email Address</label>
-                                <input type="email" id="email" name="Email" class="form-control" placeholder="Enter your email" required />
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="password" class="form-label">Password</label>
-                                <input type="password" id="password" name="Password" class="form-control" placeholder="Enter a password (min 6 characters)" required />
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="confirm" class="form-label">Confirm Password</label>
-                                <input type="password" id="confirm" name="ConfirmPassword" class="form-control" placeholder="Confirm your password" required />
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="code" class="form-label">Staff Code</label>
-                                <input type="text" id="code" name="StaffCode" class="form-control" placeholder="Enter the staff code" required />
-                                <small class="form-text text-muted">Contact your administrator for the staff code</small>
-                            </div>
-
-                            <button type="submit" class="btn btn-success w-100">Create Account</button>
-                        </form>
-
-                        <hr class="my-4" />
-
-                        <div class="text-center">
-                            <p>Already have an account? <a href="/" class="fw-bold">Sign In Here</a></p>
-                        </div>
-                    </div>
+            @if (!string.IsNullOrEmpty(Model.Message))
+            {
+                <div class="alert alert-@Model.MessageType py-2 login-hint" role="alert">
+                    @Model.Message
                 </div>
+            }
+
+            <form method="post">
+
+                <div class="mb-3">
+                    <label for="email" class="form-label login-label">Email Address</label>
+                    <input type="email" id="email" name="Email" class="form-control" placeholder="you@example.com" required />
+                </div>
+
+                <div class="mb-3">
+                    <label for="password" class="form-label login-label">Password</label>
+                    <input type="password" id="password" name="Password" class="form-control" placeholder="Min. 6 characters" required />
+                </div>
+
+                <div class="mb-3">
+                    <label for="confirm" class="form-label login-label">Confirm Password</label>
+                    <input type="password" id="confirm" name="ConfirmPassword" class="form-control" placeholder="Re-enter your password" required />
+                </div>
+
+                <div class="mb-4">
+                    <label for="code" class="form-label login-label">Staff Code</label>
+                    <input type="text" id="code" name="StaffCode" class="form-control" placeholder="Enter staff code" required />
+                    <div class="form-hint-muted mt-1">Contact your administrator for the staff code.</div>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">Create Account</button>
+            </form>
+
+            <hr class="my-4" />
+
+            <div class="text-center login-footer">
+                <p class="mb-0">Already have an account? <a href="/" class="fw-bold link-accent">Sign In Here</a></p>
             </div>
         </div>
     </div>
